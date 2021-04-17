@@ -1,0 +1,546 @@
+
+
+
+import 'package:Filerole/generated/l10n.dart';
+import 'package:Filerole/model/Constants.dart';
+import 'package:Filerole/model/MasterProfileDetailsModel.dart';
+import 'package:flutter/material.dart';
+
+
+//Types of Screen Buttons
+enum ButtonTypes {
+  savingBtn,
+  changePass,
+
+}
+
+class MasterProfile extends StatefulWidget {
+
+   //test data
+   MasterProfileDetailsModel masterProfile = MasterProfileDetailsModel(
+     imgUrl: 'https://instagram.fcai21-2.fna.fbcdn.net/v/t51.2885-15/e15/s320x320/11257032_692162207576745_1286537254_n.jpg?tp=1&_nc_ht=instagram.fcai21-2.fna.fbcdn.net&_nc_cat=109&_nc_ohc=TNm79m_HHyIAX-GRepl&oh=e6f61ba9f928ee4e85f776c74958f16f&oe=607A40CD',
+     email: 'moabdallah@gmail.com' ,
+     firstName: 'Mohammed',
+     lastName: 'Abdallah' ,
+     phone: '+201097081508' ,
+   );
+
+  @override
+  _MasterProfileState createState() => _MasterProfileState();
+}
+
+class _MasterProfileState extends State<MasterProfile> {
+  //Form key
+  final formKey = GlobalKey<FormState>();
+  //flag var to switch between Details Screen & Change pass Screen
+  bool changePassword = false ;
+
+
+  @override
+  Widget build(BuildContext context) {
+
+
+    return  SingleChildScrollView(
+      child:   Container(
+           padding: const EdgeInsets.only(bottom: 20 , top: 0 ,left: 17 , right: 17),
+          child:  Column(
+             children: [
+
+            //page head
+
+              SizedBox(width: double.infinity,child:
+            Text( S.of(context).master_label_profile,
+                style: TextStyle( color: Colors.black54,fontWeight: FontWeight.w800,height: 1.5,fontSize: 23))),
+            Divider(color:   Colors.transparent, height: 3,),
+
+
+             //master profile picture
+             masterProfilePictureWidget (),
+            Divider(color:   Colors.transparent, height: 15,),
+
+            //profile form details
+            profileFormDetailsWidget(changePassword),
+
+
+            //saving button + change password button
+             Row(
+              children: [
+                Expanded(child: savingButton(ButtonTypes.changePass)),
+                VerticalDivider(color: Colors.transparent,width: 6,),
+                Expanded(child: savingButton(ButtonTypes.savingBtn)),
+              ],
+            ),
+           Divider(color:   Colors.transparent, height: 10,),
+
+
+
+
+
+
+
+           ],)
+
+      ),
+    );
+  }
+
+  Widget masterProfilePictureWidget(){
+    return Container(
+      width: 160,
+      child: AspectRatio(
+        aspectRatio: 1,
+        child:
+        Stack(
+          children: [
+            Container(
+
+              padding: EdgeInsets.all(17),
+              width:double.infinity,
+              height:double.infinity,
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(25),
+                  child: Image.network(widget.masterProfile.imgUrl ,
+
+                   fit:BoxFit.fill ,
+                  ) ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+
+              child: CircleAvatar(
+                backgroundColor:Colors.blueAccent,
+                child: IconButton(
+
+                  onPressed: (){},
+                  icon: Icon(Icons.camera_alt_outlined ,),
+                ),
+              ),),
+          ],
+        ),
+
+      ),
+    );
+  }
+  Widget subHeadTitle (String title ){
+    return Text(title, textAlign: TextAlign.start,style: TextStyle(fontSize: 15.8 , height: 1 ,fontWeight: FontWeight.w800, color:Colors.black45),);
+  }
+  Widget savingButton(ButtonTypes btnType){
+
+    if( btnType== ButtonTypes.savingBtn){
+      return Container(
+
+
+
+        height: 50,
+        child: FlatButton(
+          color: Colors.blue,
+
+          shape: RoundedRectangleBorder(
+
+            borderRadius: BorderRadius.circular(25.0),
+          ),
+          //color: clrGreen3,
+
+
+
+          onPressed: (){
+            formKey.currentState.save();
+          } , child: Text(S.of(context).save_edits.toUpperCase(),style: TextStyle(color: Colors.white,fontSize: 16,wordSpacing: 1,fontWeight: FontWeight.bold),),
+
+
+        ),
+      )    ;
+    }
+    else {
+      return Container(
+
+
+
+        height: 50,
+        child: OutlineButton(
+          borderSide: BorderSide(color:  Colors.blue.withOpacity(0.5), width: 1),
+          shape: RoundedRectangleBorder(
+
+            borderRadius: BorderRadius.circular(25.0),
+          ),
+          //color: clrGreen3,
+
+
+
+          onPressed: (){
+
+            setState(() {
+              //repaint screen with change password UI
+              (changePassword)?changePassword= false  :changePassword= true  ;
+            });
+          } , child: Text(S.of(context).change_password.toUpperCase(),textAlign: TextAlign.center,style: TextStyle(color:Colors.black54,fontSize: 14,wordSpacing: 1,fontWeight: FontWeight.bold),),
+
+
+        ),
+      )    ;
+    }
+
+
+  }
+
+
+  Widget profileFormDetailsWidget ( bool changePassword ){
+
+    //Switching between normal profile details screen & Change password Screen
+    //depends on bool flag that's changing from buttons
+
+    return Form(
+      key: formKey,
+
+      child:
+        (changePassword) ? changePassProfileWidgets() : normalDetailsProfileWidgets()
+
+
+    );
+  }
+
+  Widget normalDetailsProfileWidgets(){
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+
+        //first & last name
+        Row(
+          //mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+
+
+            Expanded(
+
+              child:  Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+
+                children: [
+                  subHeadTitle( S.of(context).first_name),
+                  Container(
+                    margin: EdgeInsets.only(top: 5.5 , bottom: 30) ,
+                    decoration: BoxDecoration(
+                    // color: clrInputBackground,
+                      border: Border.all(
+                        color: clrBorder,
+                        width: 1.2,
+                      ),
+                      borderRadius: BorderRadius.circular(15 ),
+                    ),
+                    child: TextFormField(
+                        textInputAction: TextInputAction.next,
+                        onSaved:(item){
+                          widget.masterProfile.firstName = item;
+
+                        } ,
+
+
+                        keyboardType: TextInputType.text ,
+
+                        decoration: InputDecoration(
+
+
+                          contentPadding: EdgeInsets.symmetric(horizontal:12,vertical: 6 ),
+
+
+                          border: InputBorder.none,
+                          hintText: widget.masterProfile.firstName ,
+                          hintStyle: TextStyle(color: Colors.black45),
+
+
+
+                        )
+                    ),
+                  ),
+
+
+                ],
+              ),),
+
+            VerticalDivider(color: Colors.transparent,),
+
+            Expanded(child:
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+
+              children: [
+                subHeadTitle( S.of(context).last_time),
+
+                Container(
+                  margin: EdgeInsets.only(top: 5.5 , bottom: 30) ,
+                  decoration: BoxDecoration(
+                    //color: clrInputBackground,
+
+                    border: Border.all(
+                      color: clrBorder,
+                      width: 1.2,
+                    ),
+                    borderRadius:   BorderRadius.circular(15 ),
+                  ),
+                  child: TextFormField(
+
+                      textInputAction: TextInputAction.next,
+                      onSaved:(item){
+                        widget.masterProfile.lastName=item;
+
+                      } ,
+
+
+                      keyboardType: TextInputType.text ,
+
+
+                      decoration: InputDecoration(
+
+
+                        contentPadding: EdgeInsets.symmetric(horizontal:12,vertical: 6 ),
+
+                        border: InputBorder.none,
+
+                        hintText: widget.masterProfile.lastName ,
+                        hintStyle: TextStyle(color: Colors.black45),
+
+
+
+                      )
+                  ),
+                ),
+
+              ],
+            ),
+            ),
+          ],),
+
+
+        //email address
+        subHeadTitle( S.of(context).email , ),
+        Container(
+          margin: EdgeInsets.only(top: 5.5 , bottom: 30) ,
+          decoration: BoxDecoration(
+          //  color: clrInputBackground,
+            border: Border.all(
+              color: clrBorder,
+              width: 1.2,
+            ),
+            borderRadius: BorderRadius.circular(15 ),
+          ),
+          child: TextFormField(
+
+              textInputAction: TextInputAction.next,
+              onSaved:(item){
+                widget.masterProfile.email=item;
+
+              } ,
+
+
+              keyboardType: TextInputType.text ,
+
+              decoration: InputDecoration(
+                suffixIcon: Icon(Icons.mail_outline,color: clrGreen2,),
+
+
+
+                contentPadding: EdgeInsets.symmetric(horizontal:12,vertical: 6 ),
+
+                border: InputBorder.none,
+                hintText:  widget.masterProfile.email ,
+                 hintStyle: TextStyle(color: Colors.black45),
+
+
+
+              )
+          ),
+        ),
+
+        //phone
+        subHeadTitle( S.of(context).phone_number, ),
+
+        Container(
+
+          margin: EdgeInsets.only(top: 5.5 , bottom: 30) ,
+          decoration: BoxDecoration(
+          //  color: clrInputBackground,
+            border: Border.all(
+              color: clrBorder,
+              width: 1.2,
+            ),
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: TextFormField(
+
+              textInputAction: TextInputAction.next,
+              onSaved:(item){
+                widget.masterProfile.phone=item;
+
+              } ,
+
+              //style: TextStyle(height:2),
+
+              keyboardType: TextInputType.text ,
+
+
+              decoration: InputDecoration(
+
+
+                contentPadding: EdgeInsets.symmetric(horizontal:12,vertical: 6 ),
+
+                border: InputBorder.none,
+                suffixIcon: Icon(Icons.phone_android_outlined,color: clrGreen2,),
+                hintText:  widget.masterProfile.phone ,
+                 hintStyle: TextStyle(color: Colors.black45),
+
+
+
+              )
+          ),
+        ),
+
+
+
+      ],
+    );
+  }
+
+  Widget changePassProfileWidgets(){
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+
+      children: [
+
+        //old pass
+        subHeadTitle( S.of(context).password_old , ),
+
+        Container(
+
+          margin: EdgeInsets.only(top: 5.5 , bottom: 30) ,
+          decoration: BoxDecoration(
+          //  color: clrInputBackground,
+            border: Border.all(
+              color: clrBorder,
+              width: 1.2,
+            ),
+            borderRadius: BorderRadius.circular(15 ),
+          ),
+          child: TextFormField(
+
+              textInputAction: TextInputAction.next,
+              onSaved:(item){
+                widget.masterProfile.phone=item;
+
+              } ,
+
+              //style: TextStyle(height:2),
+
+              keyboardType: TextInputType.text ,
+
+              obscureText: true,
+              decoration: InputDecoration(
+
+
+                contentPadding: EdgeInsets.symmetric(horizontal:12,vertical: 6 ),
+
+                border: InputBorder.none,
+                 suffixIcon: Icon(Icons.lock_outline,color: clrGreen2,),
+
+                 hintStyle: TextStyle(color: Colors.black45),
+
+
+
+              )
+          ),
+        ),
+
+        //new pass
+        subHeadTitle( S.of(context).password_new , ),
+
+        Container(
+
+          margin: EdgeInsets.only(top: 5.5 , bottom: 30) ,
+          decoration: BoxDecoration(
+           // color: clrInputBackground,
+            border: Border.all(
+              color: clrBorder,
+              width: 1.2,
+            ),
+            borderRadius: BorderRadius.circular(15 ),
+          ),
+          child: TextFormField(
+
+              textInputAction: TextInputAction.next,
+              onSaved:(item){
+                widget.masterProfile.phone=item;
+
+              } ,
+
+              //style: TextStyle(height:2),
+
+              keyboardType: TextInputType.text ,
+              obscureText: true,
+
+
+              decoration: InputDecoration(
+
+
+                contentPadding: EdgeInsets.symmetric(horizontal:12,vertical: 6 ),
+
+                border: InputBorder.none,
+                suffixIcon: Icon(Icons.remove_red_eye_outlined,color: clrBorder,),
+                 hintStyle: TextStyle(color: Colors.black45),
+
+
+
+              )
+          ),
+        ),
+
+        //re-type pass
+        subHeadTitle( S.of(context).password_retype , ),
+
+        Container(
+
+          margin: EdgeInsets.only(top: 5.5 , bottom: 30) ,
+          decoration: BoxDecoration(
+         //   color: clrInputBackground,
+            border: Border.all(
+              color: clrBorder,
+              width: 1.2,
+            ),
+            borderRadius: BorderRadius.circular(15 ),
+          ),
+          child: TextFormField(
+              obscureText: true,
+              obscuringCharacter: '•',
+
+
+              textInputAction: TextInputAction.next,
+              onSaved:(item){
+               // widget.masterProfile.phone=item;
+
+              } ,
+
+              //style: TextStyle(height:2),
+
+              keyboardType: TextInputType.text ,
+
+
+              decoration: InputDecoration(
+
+
+                contentPadding: EdgeInsets.symmetric(horizontal:12,vertical: 6 ),
+
+                border: InputBorder.none,
+                suffixIcon: Icon(Icons.remove_red_eye_outlined,color: clrBorder,),
+
+                 hintStyle: TextStyle(color: Colors.black45),
+
+
+
+              )
+          ),
+        ),
+
+       ],
+    );
+  }
+}

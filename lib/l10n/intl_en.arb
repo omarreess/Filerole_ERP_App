@@ -1,0 +1,37 @@
+
+{
+  "master_label_payments": "Payments",
+  "master_label_subscriptions": "Subscriptions",
+  "master_label_payment_method": "Payment Method",
+  "master_label_profile": "Profile",
+  "change_lang": "Change language",
+
+  "sort_by": "Sort By",
+
+  "payments": "Payments",
+  "plans": "My Subscriptions Plans",
+
+  "ccv": "CCV",
+  "expiry_date": "Expiry Date",
+  "card_name": "Name on Card",
+  "card_number": "Card Number" ,
+
+  "first_name": "First Name",
+  "last_time": "Last  Name",
+  "email": "Email Address",
+  "phone_number": "Phone Number",
+
+  "add_card": "Add Card",
+
+  "save_edits": "Save Edits",
+  "change_password": "Change Password",
+  "password_old": "Old Password",
+  "password_new": "New Password",
+  "password_retype": "Re-Type Password"
+
+
+
+
+
+ }
+
