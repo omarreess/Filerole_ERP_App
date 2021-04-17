@@ -1,6 +1,5 @@
-# filerole_landing_app
+# Filerole ERP App
 
-Filerole Landing App 
 
 ## Getting Started
 
