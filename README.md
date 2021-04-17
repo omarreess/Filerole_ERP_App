@@ -4,10 +4,13 @@ Filerole ERP App for Adminstratating Filerole's ERP System Build with Flutter SD
 
 
 For App's Video Screen record:
-
 https://drive.google.com/drive/u/0/folders/17Hh8N-cSyakl4m0J2pjoXeuOhDQeTqhx
 
-## App UI Screens
+## App's Code Architecture
+![alt text](https://github.com/omarreess/Filerole_ERP_App/blob/master/Filerole%20UI/filerole_arch.png)
+
+
+## App's UI Screens
 
 <p float="left">
   <img src="https://github.com/omarreess/Filerole_ERP_App/blob/master/Filerole%20UI/Screenshot_2021-04-15-17-49-41-45_23eb85fe9da3756818fdce7313bd4d79.jpg" width="235" />
