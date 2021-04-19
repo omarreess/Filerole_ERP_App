@@ -1,6 +1,6 @@
 # Filerole ERP App
 
-Filerole ERP App for Administrating Filerole's ERP System Build with Flutter SDK & Graphql API.
+Filerole ERP App for Administrating Filerole's ERP System Build with Flutter SDK & GraphQL API.
 
 
 For App's Video Screen record:
