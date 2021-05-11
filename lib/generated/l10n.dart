@@ -95,6 +95,36 @@ class S {
     );
   }
 
+  /// `Recently Added`
+  String get sort_by_date {
+    return Intl.message(
+      'Recently Added',
+      name: 'sort_by_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Highest Paid`
+  String get sort_by_highpaid {
+    return Intl.message(
+      'Highest Paid',
+      name: 'sort_by_highpaid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lowest Paid`
+  String get sort_by_lowpaid {
+    return Intl.message(
+      'Lowest Paid',
+      name: 'sort_by_lowpaid',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Payments`
   String get payments {
     return Intl.message(

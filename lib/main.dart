@@ -1,11 +1,11 @@
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
 
- import 'generated/l10n.dart';
+import 'generated/l10n.dart';
 import 'model/Constants.dart';
 import 'model/LanguageProvider.dart';
 
@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
 
         debugShowCheckedModeBanner: false,
          title: 'Filerole',
-        initialRoute: 'splash',
+        initialRoute: 'master_main',
 
         routes:appRoutes,
         theme: ThemeData(

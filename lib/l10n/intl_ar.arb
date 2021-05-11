@@ -8,6 +8,10 @@
 
 
   "sort_by": "رتب حسب",
+  "sort_by_date": "أضيف حديثا",
+  "sort_by_highpaid": "اعلي المدفوعات",
+  "sort_by_lowpaid": "اقل المدفوعات",
+
   "payments": "المدفوعات",
 
 

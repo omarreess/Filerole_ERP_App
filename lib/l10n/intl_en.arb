@@ -7,6 +7,9 @@
   "change_lang": "Change language",
 
   "sort_by": "Sort By",
+  "sort_by_date": "Recently Added",
+  "sort_by_highpaid": "Highest Paid",
+  "sort_by_lowpaid": "Lowest Paid",
 
   "payments": "Payments",
   "plans": "My Subscriptions Plans",

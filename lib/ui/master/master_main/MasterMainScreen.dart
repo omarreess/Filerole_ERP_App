@@ -32,7 +32,6 @@ class MasterMainScreen extends StatefulWidget {
 
 class _MasterMainScreenState extends State<MasterMainScreen> with TickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
   TabController tabController;
 
 

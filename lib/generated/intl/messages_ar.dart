@@ -42,6 +42,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "phone_number" : MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
     "plans" : MessageLookupByLibrary.simpleMessage("خطط اشتراكاتي"),
     "save_edits" : MessageLookupByLibrary.simpleMessage("حفط التغيرات"),
-    "sort_by" : MessageLookupByLibrary.simpleMessage("رتب حسب")
+    "sort_by" : MessageLookupByLibrary.simpleMessage("رتب حسب"),
+    "sort_by_date" : MessageLookupByLibrary.simpleMessage("أضيف حديثا"),
+    "sort_by_highpaid" : MessageLookupByLibrary.simpleMessage("اعلي المدفوعات"),
+    "sort_by_lowpaid" : MessageLookupByLibrary.simpleMessage("اقل المدفوعات")
   };
 }

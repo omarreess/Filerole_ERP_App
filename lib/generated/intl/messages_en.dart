@@ -42,6 +42,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "phone_number" : MessageLookupByLibrary.simpleMessage("Phone Number"),
     "plans" : MessageLookupByLibrary.simpleMessage("My Subscriptions Plans"),
     "save_edits" : MessageLookupByLibrary.simpleMessage("Save Edits"),
-    "sort_by" : MessageLookupByLibrary.simpleMessage("Sort By")
+    "sort_by" : MessageLookupByLibrary.simpleMessage("Sort By"),
+    "sort_by_date" : MessageLookupByLibrary.simpleMessage("Recently Added"),
+    "sort_by_highpaid" : MessageLookupByLibrary.simpleMessage("Highest Paid"),
+    "sort_by_lowpaid" : MessageLookupByLibrary.simpleMessage("Lowest Paid")
   };
 }
