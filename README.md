@@ -1,16 +1,52 @@
-# filerole_landing_app
+# Filerole ERP App
 
-Filerole Landing App 
+Filerole ERP App for Administrating Filerole's ERP System Build with Flutter SDK & GraphQL API.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+For App's Video Screen record:
+https://drive.google.com/drive/u/0/folders/17Hh8N-cSyakl4m0J2pjoXeuOhDQeTqhx
 
-A few resources to get you started if this is your first Flutter project:
+## App's Code Architecture
+![alt text](https://github.com/omarreess/Filerole_ERP_App/blob/master/Filerole%20UI/filerole_arch.png)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## App's UI Screens
+
+<p float="left">
+  <img src="https://github.com/omarreess/Filerole_ERP_App/blob/master/Filerole%20UI/Screenshot_2021-04-15-17-49-41-45_23eb85fe9da3756818fdce7313bd4d79.jpg" width="235" />
+    <img src="https://github.com/omarreess/Filerole_ERP_App/blob/master/Filerole%20UI/Screenshot_2021-04-15-17-46-01-66_23eb85fe9da3756818fdce7313bd4d79.jpg" width="235" /> 
+  <img src="https://github.com/omarreess/Filerole_ERP_App/blob/master/Filerole%20UI/Screenshot_2021-04-15-17-46-15-44_23eb85fe9da3756818fdce7313bd4d79.jpg" width="235" />
+ 
+
+
+  
+</p>
+<p float="left">
+  <img src="https://github.com/omarreess/Filerole_ERP_App/blob/master/Filerole%20UI/Screenshot_2021-04-15-17-45-51-86_23eb85fe9da3756818fdce7313bd4d79.jpg" width="185" /> 
+  <img src="https://github.com/omarreess/Filerole_ERP_App/blob/master/Filerole%20UI/Screenshot_2021-04-15-17-45-56-54_23eb85fe9da3756818fdce7313bd4d79.jpg" width="185" />
+
+   <img src="https://github.com/omarreess/Filerole_ERP_App/blob/master/Filerole%20UI/Screenshot_2021-04-15-17-45-54-11_23eb85fe9da3756818fdce7313bd4d79.jpg" width="185" />
+  <img src="https://github.com/omarreess/Filerole_ERP_App/blob/master/Filerole%20UI/Screenshot_2021-04-15-17-46-28-88_23eb85fe9da3756818fdce7313bd4d79.jpg" width="185" />
+   
+ 
+  
+  
+</p>
+<p float="left">
+ 
+   <img src="https://github.com/omarreess/Filerole_ERP_App/blob/master/Filerole%20UI/Screenshot_2021-04-15-17-46-55-73_23eb85fe9da3756818fdce7313bd4d79.jpg" width="185" />
+ 
+   <img src="https://github.com/omarreess/Filerole_ERP_App/blob/master/Filerole%20UI/Screenshot_2021-04-15-17-48-04-21_23eb85fe9da3756818fdce7313bd4d79.jpg" width="185" />
+  <img src="https://github.com/omarreess/Filerole_ERP_App/blob/master/Filerole%20UI/Screenshot_2021-04-15-19-06-20-21_23eb85fe9da3756818fdce7313bd4d79.jpg" width="185" />
+    <img src="https://github.com/omarreess/Filerole_ERP_App/blob/master/Filerole%20UI/Screenshot_2021-04-15-17-49-15-36_23eb85fe9da3756818fdce7313bd4d79.jpg" width="185"/>
+  
+  
+</p>
+<p float="left">
+
+  <img src="https://github.com/omarreess/Filerole_ERP_App/blob/master/Filerole%20UI/Screenshot_2021-04-15-17-48-40-74_23eb85fe9da3756818fdce7313bd4d79.jpg" width="250" />
+   <img src="https://github.com/omarreess/Filerole_ERP_App/blob/master/Filerole%20UI/Screenshot_2021-04-15-17-48-07-93_23eb85fe9da3756818fdce7313bd4d79.jpg" width="250" />
+
+  
+  
+</p>
