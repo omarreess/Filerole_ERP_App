@@ -158,10 +158,18 @@ class AuthIntroScreen extends StatelessWidget {
 
                        onTap: (){
                          final String url = 'https://filerole.com/register';
-                         MyInAppBrowser().openUrlRequest(
-                           options: options,
-                             urlRequest: URLRequest(url: Uri.parse(url))
-                         );
+                         MyChromeSafariBrowser().open(
+                             url: Uri.parse(url),
+                             options: ChromeSafariBrowserClassOptions(
+
+                                 android: AndroidChromeCustomTabsOptions(   addDefaultShareMenuItem: false),
+
+                                 ios: IOSSafariOptions(barCollapsingEnabled: true)));
+
+                         // MyInAppBrowser().openUrlRequest(
+                         //   options: options,
+                         //     urlRequest: URLRequest(url: Uri.parse(url))
+                         // );
 
 
                         // Navigator.pushNamed(context, 'register');
