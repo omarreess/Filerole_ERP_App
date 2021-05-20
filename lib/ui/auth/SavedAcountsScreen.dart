@@ -14,10 +14,10 @@ class SavedAccountsScreen extends StatefulWidget {
 class _SavedAccountsScreenState extends State<SavedAccountsScreen> {
 
 
-  List<MasterAccountModel> masterAccountsArr = List();
-  Map<String , dynamic> userMap ;
-  SharedPreferences prefs;
-  SaveAccountsSharedPref prefss;
+  List<MasterAccountModel> masterAccountsArr = List.empty(growable: true);
+  Map<String , dynamic>? userMap ;
+  SharedPreferences? prefs;
+  late SaveAccountsSharedPref prefss;
   @override
   Widget build(BuildContext context) {
 
@@ -47,7 +47,7 @@ class _SavedAccountsScreenState extends State<SavedAccountsScreen> {
                    return Text('Error: ${snapshot.error}');
                  else
                  {
-                   if (snapshot.data){
+                   if (snapshot.data!){
                      return accountsListWidgets();
                    }else{
                      return  Container(
@@ -148,9 +148,9 @@ class _SavedAccountsScreenState extends State<SavedAccountsScreen> {
 
                   },
                     child: ListTile(
-                       leading:   Image.network(masterAccountsArr[index].img ,  height: 80,  width: 80 ,  )   ,
-                    title: Text(masterAccountsArr[index].storeName , style: TextStyle(fontSize: 20),),
-                    subtitle: Text(masterAccountsArr[index].domain , style: TextStyle(fontSize: 15) ),
+                       leading:   Image.network(masterAccountsArr[index].img! ,  height: 80,  width: 80 ,  )   ,
+                    title: Text(masterAccountsArr[index].storeName! , style: TextStyle(fontSize: 20),),
+                    subtitle: Text(masterAccountsArr[index].domain! , style: TextStyle(fontSize: 15) ),
                 ),
                   ),
 
@@ -201,7 +201,7 @@ class _SavedAccountsScreenState extends State<SavedAccountsScreen> {
 
     userMap =  prefss.getSavedAccounts();
 
-    userMap.forEach((key, value) {
+    userMap!.forEach((key, value) {
       masterAccountsArr
         ..add(MasterAccountModel(domain: value['domain'] , storeName:value['storeName'] , img:  value['img']));
 

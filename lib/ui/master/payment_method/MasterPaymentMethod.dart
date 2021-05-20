@@ -39,7 +39,7 @@ class MasterPaymentMethod extends StatelessWidget {
 
 
 
-  Widget subHeadTitle ({String title , }){
+  Widget subHeadTitle ({required String title , }){
     return Text(title,
        style: TextStyle(fontSize: 15.8 , height: 1 ,fontWeight: FontWeight.w700, color:Colors.black54),
     );
@@ -55,7 +55,7 @@ class MasterPaymentMethod extends StatelessWidget {
       width: double.infinity,
       height: 50,
       child: ElevatedButton(onPressed: (){
-        formKey.currentState.save();
+        formKey.currentState!.save();
 
       } , child: Text(S.current.add_card.toUpperCase(),style: TextStyle(fontSize: 16,wordSpacing: 1,fontWeight: FontWeight.bold),),
 

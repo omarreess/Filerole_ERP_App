@@ -9,30 +9,30 @@ import 'AuthInterface.dart';
 class StuffAuth implements AuthInterface {
 
   @override
-  String endpointLink;
+  String? endpointLink;
 
   @override
-  GraphQLClient graphQLClient(  {String endpoint ,String token}) {
+  GraphQLClient graphQLClient(  {String? endpoint ,String? token}) {
     return GraphQLClient(
 
         cache: GraphQLCache(store: HiveStore()),
         link:  (token==null)
-            ? HttpLink( endpointLink    )
+            ? HttpLink( endpointLink!    )
             : AuthLink(
           getToken: ()  => generateHeader(token),
-        ) . concat(HttpLink( endpointLink   ))
+        ) . concat(HttpLink( endpointLink!   ))
 
     );
   }
 
   @override
-  String forgetPasswordQuery;
+  String? forgetPasswordQuery;
 
   @override
-  String loginQuery;
+  String? loginQuery;
 
   @override
-  String logoutQuery;
+  String? logoutQuery;
 
 
   @override
@@ -42,12 +42,12 @@ class StuffAuth implements AuthInterface {
     ;
   }
   @override
-  Future<QueryResult> graphQLClientRequest({ String queryDoc, Map<String, dynamic> args , String token }) {
+  Future<QueryResult> graphQLClientRequest({ String? queryDoc, Map<String, dynamic>? args , String? token }) {
 
     return graphQLClient(endpoint :endpointLink, token: token ).query(
       QueryOptions(
-        document:gql(queryDoc) ,
-        variables:args,
+        document:gql(queryDoc!) ,
+        variables:args!,
 
 
       ),
@@ -56,7 +56,7 @@ class StuffAuth implements AuthInterface {
   }
 
   @override
-  String getProfileQuery = """
+  String? getProfileQuery = """
   {
   profile  {
       id 

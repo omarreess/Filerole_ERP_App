@@ -3,7 +3,7 @@
 
 class LoginAuthModel {
 
-  String password , email , serverUrl , _userType ;
+  String? password , email , serverUrl , _userType ;
 
   set userType(value) {
     (value ==0)

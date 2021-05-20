@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
      builder: (context, langProvider, child) {
      return  MaterialApp(
         //current language
-        locale:   Locale(langProvider.languageApp , ""),
+        locale:   Locale(langProvider.languageApp! , ""),
 
         //place to be localized
         localizationsDelegates:
@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
 
         debugShowCheckedModeBanner: false,
          title: 'Filerole',
-        initialRoute: 'master_main',
+        initialRoute: 'auth_intro',
 
         routes:appRoutes,
         theme: ThemeData(
@@ -94,7 +94,7 @@ final appRoutes =   {
   'login': (context) => LoginScreen(),
 
   'auth_intro': (context) => AuthIntroScreen(),
-  'register': (context) => RegisterScreen(),
+//  'register': (context) => RegisterScreen(),
   'saved_acc': (context) => SavedAccountsScreen(),
   'master_main': (context) => MasterMainScreen(),
 

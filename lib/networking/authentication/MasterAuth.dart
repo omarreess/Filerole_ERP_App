@@ -23,13 +23,13 @@ class MasterAuth implements AuthInterface {
 
 
   @override
-  String endpointLink = "https://filerolesys.com/public/graphql";
+  String? endpointLink = "https://filerolesys.com/public/graphql";
 
   @override
-  String forgetPasswordQuery  ;
+  String? forgetPasswordQuery  ;
 
   @override
-  String loginQuery = '''
+  String? loginQuery = '''
   mutation MasterLogin (\$email: String! , \$pass: String! , \$url: String! , \$userType: String!  )
 {
   login(
@@ -60,7 +60,7 @@ class MasterAuth implements AuthInterface {
 
 
   @override
-  String logoutQuery = '''
+  String? logoutQuery = '''
   mutation {
  logout{
   email
@@ -68,33 +68,33 @@ class MasterAuth implements AuthInterface {
 }
   ''';
    @override
-   GraphQLClient graphQLClient(  {String endpoint ,String token}) {
+   GraphQLClient graphQLClient(  {String? endpoint ,String? token}) {
     return GraphQLClient(
 
       cache: GraphQLCache(store: HiveStore()),
       link:  (token==null)
-          ? HttpLink( endpointLink    )
+          ? HttpLink( endpointLink!    )
           : AuthLink(
         getToken: ()  => generateHeader(token),
-      ) . concat(HttpLink( endpointLink   ))
+      ) . concat(HttpLink( endpointLink!   ))
 
     );
   }
 
   @override
-  Future<QueryResult> graphQLClientRequest({ String queryDoc, Map<String, dynamic> args , String token }) {
+  Future<QueryResult> graphQLClientRequest({ String? queryDoc, Map<String, dynamic>? args , String? token }) {
 
     return graphQLClient(endpoint :endpointLink, token: token ).query(
       QueryOptions(
-          document:gql(queryDoc) ,
-          variables:args,
+          document:gql(queryDoc!) ,
+          variables:args!,
       ),
     );
 
   }
 
   @override
-  String getProfileQuery = """
+  String? getProfileQuery = """
   {
   profile  {
       id 

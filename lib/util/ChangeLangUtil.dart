@@ -6,13 +6,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ChangeLangUtil {
 
-  SharedPreferences prefs ;
+  late SharedPreferences prefs ;
 
-  String currentAppLanguage;
+  String? currentAppLanguage;
 
   ChangeLangUtil ({this.currentAppLanguage});
 
-  Future<String> initShPref() async {
+  Future<String?> initShPref() async {
 
       prefs =  await  SharedPreferences.getInstance();
       if(_checkDataExist())
@@ -33,16 +33,16 @@ class ChangeLangUtil {
 
   }
 
-  String   _getCurrentLang(){
+  String?   _getCurrentLang(){
 
      return  prefs.getString('appLang');
 
   }
 
-  Future<bool> changeLang ({@required String lang  } ) async{
+  Future<bool?> changeLang ({required String? lang  } ) async{
    if (currentAppLanguage != lang )
      {
-       await _saveLang(lang).then(
+       await _saveLang(lang!).then(
                (value) {
                  return true ;
                }

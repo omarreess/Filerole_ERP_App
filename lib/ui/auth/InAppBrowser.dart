@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
+//Normal InAppBrowser
 class MyInAppBrowser extends InAppBrowser {
   @override
   Future onBrowserCreated() async {
@@ -58,5 +59,7 @@ class MyInAppBrowser extends InAppBrowser {
       messageLevel: ${consoleMessage.messageLevel.toValue()}
    """);
   }
+
+
 }
 

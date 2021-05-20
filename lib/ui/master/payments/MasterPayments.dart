@@ -7,7 +7,6 @@ import 'package:Filerole/ui/auth/LoginScreen.dart';
 import 'package:Filerole/ui/master/payment_method/MasterPaymentMethod.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:toast/toast.dart';
 
 class MasterPayments extends StatelessWidget {
   @override
@@ -54,7 +53,7 @@ class MasterPayments extends StatelessWidget {
       ),
     ));
   }
-  OverlayEntry popupDialog ({MasterPaymentsModel masterPaymentsModel}){
+  OverlayEntry popupDialog ({MasterPaymentsModel? masterPaymentsModel}){
    return   OverlayEntry(  builder: (context) => Center(child:
    Dialog(
 
@@ -68,9 +67,9 @@ class MasterPayments extends StatelessWidget {
                padding: const EdgeInsets.all(20.0),
                child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                  children: [
-                 Text(masterPaymentsModel.companyName , style:  TextStyle(color: clrGreen3 , fontWeight: FontWeight.bold , fontSize: 23),),
+                 Text(masterPaymentsModel!.companyName! , style:  TextStyle(color: clrGreen3 , fontWeight: FontWeight.bold , fontSize: 23),),
 
-                 Text(masterPaymentsModel.plan , style:  TextStyle(color: Colors.black38 , fontWeight: FontWeight.w800 , fontSize: 18 , height: 1.3),),
+                 Text(masterPaymentsModel.plan! , style:  TextStyle(color: Colors.black38 , fontWeight: FontWeight.w800 , fontSize: 18 , height: 1.3),),
                    Divider(height: 7,color: Colors.transparent,),
 
 
@@ -81,7 +80,7 @@ class MasterPayments extends StatelessWidget {
                      children: [
                      Text('Date : ' , style:  TextStyle(   fontSize: 18),),
 
-                     Expanded(child: Text(masterPaymentsModel.date , textAlign:TextAlign.end, style:  TextStyle(color: Colors.black54 , fontWeight: FontWeight.bold , fontSize: 22),)),
+                     Expanded(child: Text(masterPaymentsModel.date! , textAlign:TextAlign.end, style:  TextStyle(color: Colors.black54 , fontWeight: FontWeight.bold , fontSize: 22),)),
                    ],
                  ),
                    Divider(height: 5, color: Colors.transparent,),
@@ -89,7 +88,7 @@ class MasterPayments extends StatelessWidget {
                    Row(
                      children: [
                        Text('Duration : ' , style:  TextStyle(  fontSize: 18),),
-                       Expanded(child: Text(masterPaymentsModel.duration , textAlign:TextAlign.end, style:  TextStyle(color:Colors.blueAccent , fontWeight: FontWeight.bold , fontSize: 22),)),
+                       Expanded(child: Text(masterPaymentsModel.duration! , textAlign:TextAlign.end, style:  TextStyle(color:Colors.blueAccent , fontWeight: FontWeight.bold , fontSize: 22),)),
 
                      ],
                    ),
@@ -100,7 +99,7 @@ class MasterPayments extends StatelessWidget {
                    children: [
                      Text('Total : ' , style:  TextStyle(  fontSize: 23),),
 
-                     Text(masterPaymentsModel.amount , style:  TextStyle(color: clrGreen3 , fontWeight: FontWeight.bold , fontSize: 26 , height: 1),),
+                     Text(masterPaymentsModel.amount! , style:  TextStyle(color: clrGreen3 , fontWeight: FontWeight.bold , fontSize: 26 , height: 1),),
                    ],
                  ),
                ],),
@@ -114,9 +113,9 @@ class MasterPayments extends StatelessWidget {
    final  popupDialogVar = popupDialog( masterPaymentsModel : MasterPaymentsModel( companyName: 'Filerole Company' , date: '9 Aug 2020' , duration: '6 Monthes' , plan: 'Free Plan ', amount: '49 SAR'));
     return GestureDetector(
       onLongPress: () {
-         Overlay.of(ctx).insert(popupDialogVar);
+         Overlay.of(ctx)!.insert(popupDialogVar);
       },
-      onLongPressEnd: (details) => popupDialogVar?.remove(),
+      onLongPressEnd: (details) => popupDialogVar .remove(),
       child: InkWell(
         borderRadius: BorderRadius.circular(20),
         onTap: () {},
@@ -181,7 +180,7 @@ class MasterPayments extends StatelessWidget {
                   DropdownMenuItem(child: Text(S.current.sort_by_lowpaid)),
                   ],
 
-                onChanged: (value) {  },
+                onChanged: (dynamic value) {  },
               ),
             ),
            // Container(color: Colors.brown,),

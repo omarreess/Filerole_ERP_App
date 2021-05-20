@@ -9,15 +9,15 @@ import 'package:flutter/material.dart';
 class LanguageProvider extends ChangeNotifier {
 
   //initialized with en language
-  String languageApp = AppLanguages.en.toShortString();
-  ChangeLangUtil changeLangUtil  ;
+  String? languageApp = AppLanguages.en.toShortString();
+  late ChangeLangUtil changeLangUtil  ;
 
   Future<void> initChangeLangUtil(  ) async {
       changeLangUtil = ChangeLangUtil(currentAppLanguage: languageApp);
        changeLang( await changeLangUtil.initShPref());
   }
 
-  void changeLang(String lang) async {
+  void changeLang(String? lang) async {
     //await changeLangUtil??initChangeLangUtil() ;
 
     changeLangUtil.changeLang(lang: lang).then(

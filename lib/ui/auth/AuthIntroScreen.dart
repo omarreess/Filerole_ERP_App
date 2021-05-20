@@ -2,12 +2,29 @@
 import 'package:Filerole/model/Constants.dart';
  import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'InAppBrowser.dart';
+import 'dart:io';
+
 
 
 class AuthIntroScreen extends StatelessWidget {
+
+
+  var options = InAppBrowserClassOptions(
+
+      crossPlatform: InAppBrowserOptions(hideUrlBar: false , toolbarTopBackgroundColor: clrBackground2),
+      android: AndroidInAppBrowserOptions(allowGoBackWithBackButton: true),
+      inAppWebViewGroupOptions: InAppWebViewGroupOptions(
+
+
+
+          crossPlatform: InAppWebViewOptions(javaScriptEnabled: true,
+          )));
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -141,7 +158,10 @@ class AuthIntroScreen extends StatelessWidget {
 
                        onTap: (){
                          final String url = 'https://filerole.com/register';
-                         MyInAppBrowser().openUrl(url: url);
+                         MyInAppBrowser().openUrlRequest(
+                           options: options,
+                             urlRequest: URLRequest(url: Uri.parse(url))
+                         );
 
 
                         // Navigator.pushNamed(context, 'register');
@@ -195,5 +215,8 @@ class AuthIntroScreen extends StatelessWidget {
 
       ),
     ) ;
+
+
   }
+
 }

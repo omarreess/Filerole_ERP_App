@@ -10,10 +10,10 @@ import 'package:Filerole/networking/authentication/MasterAuth.dart';
 import 'package:Filerole/ui/master/master_main/MasterMainScreen.dart';
 import 'package:Filerole/util/ChangeLangUtil.dart';
 import 'package:Filerole/util/SaveAccountsSharedPref.dart';
+import 'package:Filerole/util/ToastHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:toast/toast.dart';
 
 //testing login
 var data = {
@@ -22,7 +22,6 @@ var data = {
   "url": "http://test.filerolesys.com/" ,
   "userType": "owner",
 } ;
-//
 
 
 
@@ -34,9 +33,9 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
 
   AuthInterface loginAuth =  MasterAuth();
-  int userTypeValue = 0;
+  int? userTypeValue = 0;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  FocusScopeNode myFocusNode;
+  FocusScopeNode? myFocusNode;
   LoginAuthModel myAuthModel = LoginAuthModel() ;
   bool showProgressBar = false ;
 
@@ -47,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void dispose() {
-    myFocusNode.dispose();
+    myFocusNode!.dispose();
 
     super.dispose();
   }
@@ -73,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-  Widget formDetailsWidget (){
+  Widget formDetailsWidget(){
     return  Form(
       key: formKey,
       child: FocusScope(
@@ -132,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget logoWidget (){
+  Widget logoWidget(){
     return Column(
       children: [
         Container(
@@ -216,7 +215,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
 
               ],
-              onChanged: (value) {
+              onChanged: (dynamic value) {
                 setState(() {
                   myAuthModel.userType = value;
                   userTypeValue = value ;
@@ -248,7 +247,7 @@ class _LoginScreenState extends State<LoginScreen> {
         // controller: controller,
         textInputAction: TextInputAction.next,
 
-        onEditingComplete: myFocusNode.nextFocus,
+        onEditingComplete: myFocusNode!.nextFocus,
         onSaved: (url){
           myAuthModel.serverUrl = url;
         },
@@ -292,7 +291,7 @@ class _LoginScreenState extends State<LoginScreen> {
         // controller: controller,
         textInputAction: TextInputAction.next,
 
-        onEditingComplete: myFocusNode.nextFocus,
+        onEditingComplete: myFocusNode!.nextFocus,
 
         decoration: InputDecoration(
             icon: Icon(
@@ -327,7 +326,7 @@ class _LoginScreenState extends State<LoginScreen> {
       child: TextFormField(
         // controller: controller,
 
-        onEditingComplete: myFocusNode.nextFocus,
+        onEditingComplete: myFocusNode!.nextFocus,
         onSaved: (password){
           myAuthModel.password = password;
         },
@@ -374,7 +373,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 showProgressBar= true ;
               });
               //login request
-              formKey.currentState.save();
+              formKey.currentState!.save();
               checkingNetworkRequest();
 
 
@@ -468,19 +467,21 @@ class _LoginScreenState extends State<LoginScreen> {
             (response) {
             if (response.isNotLoading)
               {
+                createToast('Type Correct Data ') ;
                // Toast.show( 'Type Correct Data ', context, duration: Toast.LENGTH_LONG,backgroundColor: Colors.red.withOpacity(0.5) ,  gravity:  Toast.BOTTOM);
 
                }
 
-          if ( response.data ['login']['status'].toString() == "200"){
-            StaticUserVar. userAccount.token = response.data ['login']['token'];
-            StaticUserVar. userAccount.email = response.data ['login']['user']['email'];
-            StaticUserVar. userAccount.name = response.data ['login']['user']['name'];
-            StaticUserVar. userAccount.phoneNumber = response.data ['login']['user']['phone_number'];
-            StaticUserVar. userAccount.address = response.data ['login']['user']['address'];
-            StaticUserVar. userAccount.userType = response.data ['login']['userType'];
-            StaticUserVar. userAccount.endpoint = response.data ['login']['endPoint'];
+          if ( response.data! ['login']['status'].toString() == "200"){
+            StaticUserVar. userAccount.token = response.data! ['login']['token'];
+            StaticUserVar. userAccount.email = response.data! ['login']['user']['email'];
+            StaticUserVar. userAccount.name = response.data! ['login']['user']['name'];
+            StaticUserVar. userAccount.phoneNumber = response.data! ['login']['user']['phone_number'];
+            StaticUserVar. userAccount.address = response.data! ['login']['user']['address'];
+            StaticUserVar. userAccount.userType = response.data! ['login']['userType'];
+            StaticUserVar. userAccount.endpoint = response.data! ['login']['endPoint'];
 
+            createToast('Login success ${StaticUserVar.  userAccount.endpoint} ${response.data! ['login']['user']['email']}');
             // Toast.show( 'Login success ${StaticUserVar.  userAccount.endpoint} ${response.data ['login']['user']['email']}', context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
 
              if(StaticUserVar. userAccount.userType=="owner"){
@@ -495,7 +496,8 @@ class _LoginScreenState extends State<LoginScreen> {
             });
     }
      ).catchError((n){
-      Toast.show( 'Error occurred ', context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+
+     // Toast.show( 'Error occurred ', context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
       setState(() {
         showProgressBar=false;
       });

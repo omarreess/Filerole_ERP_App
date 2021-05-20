@@ -99,7 +99,7 @@ class _MasterProfileState extends State<MasterProfile> {
               height:double.infinity,
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(25),
-                  child: Image.network(widget.masterProfile.imgUrl ,
+                  child: Image.network(widget.masterProfile.imgUrl! ,
 
                    fit:BoxFit.fill ,
                   ) ),
@@ -144,7 +144,7 @@ class _MasterProfileState extends State<MasterProfile> {
 
 
           onPressed: (){
-            formKey.currentState.save();
+            formKey.currentState!.save();
           } , child: Text(S.of(context).save_edits.toUpperCase(),style: TextStyle(color: Colors.white,fontSize: 16,wordSpacing: 1,fontWeight: FontWeight.bold),),
 
 
@@ -356,7 +356,6 @@ class _MasterProfileState extends State<MasterProfile> {
         subHeadTitle( S.of(context).phone_number, ),
 
         Container(
-
           margin: EdgeInsets.only(top: 5.5 , bottom: 30) ,
           decoration: BoxDecoration(
           //  color: clrInputBackground,

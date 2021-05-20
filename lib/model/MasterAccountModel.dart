@@ -2,18 +2,18 @@
 
 
 class MasterAccountModel {
-  String storeName;
-  String domain;
-  String img;
-  String token ;
-  String id;
-  String name;
-  String email;
-  String phoneNumber;
-  String address;
-  String endpoint;
-  String   subscriptions;
-  String   userType;
+  String? storeName;
+  String? domain;
+  String? img;
+  String? token ;
+  String? id;
+  String? name;
+  String? email;
+  String? phoneNumber;
+  String? address;
+  String? endpoint;
+  String?   subscriptions;
+  String?   userType;
 
   MasterAccountModel({
     this.name,

@@ -15,10 +15,10 @@ import 'package:Filerole/ui/master/payments/MasterPayments.dart';
 import 'package:Filerole/ui/master/subscriptions/MasterSubscription.dart';
 import 'package:Filerole/util/ChangeLangUtil.dart';
 import 'package:Filerole/util/GettingVersionCode.dart';
+import 'package:Filerole/util/ToastHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:toast/toast.dart';
 
 class StaticUserVar {
 //app lifetime var contain user's token .....
@@ -32,7 +32,7 @@ class MasterMainScreen extends StatefulWidget {
 
 class _MasterMainScreenState extends State<MasterMainScreen> with TickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  TabController tabController;
+  TabController? tabController;
 
 
 
@@ -104,7 +104,7 @@ class _MasterMainScreenState extends State<MasterMainScreen> with TickerProvider
     borderRadius: BorderRadius.circular(15),
     onTap: (){
 
-      _scaffoldKey.currentState.openDrawer();    },
+      _scaffoldKey.currentState!.openDrawer();    },
     child: Container(
       padding: EdgeInsets.only(left: 15.0,right: 15.0),
       child: SvgPicture.asset(
@@ -309,16 +309,16 @@ controller: tabController,
       );
   }
 
-  Widget drawerItemNavigator({String label , IconData icon ,BuildContext ctx, int index} ){
+  Widget drawerItemNavigator({required String label , IconData? icon ,BuildContext? ctx, required int index} ){
     return   FlatButton(
       //if index <4 means it's change language buttons
 
       onPressed: (){
        if (index<4)
-         {tabController.animateTo((index));
+         {tabController!.animateTo((index));
 
 
-        Navigator.of(ctx).pop();}
+        Navigator.of(ctx!).pop();}
 
 
       },
@@ -348,13 +348,14 @@ controller: tabController,
     ).then(
             (response) {
 
-
-          Toast.show( 'Bye ${StaticUserVar.  userAccount.name} ${response.data }', context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+              createToast('Bye ${StaticUserVar.  userAccount.name} ${response.data }');
+        //  Toast.show( 'Bye ${StaticUserVar.  userAccount.name} ${response.data }', context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
           toLoginScreen();
 
         })
     .catchError((error){
-      Toast.show( 'Error Occured ', context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+      createToast('Error Occured ');
+    //  Toast.show( 'Error Occured ', context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
     });
   }
   void toLoginScreen(){

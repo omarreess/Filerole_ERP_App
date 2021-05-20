@@ -7,14 +7,14 @@ abstract class AuthInterface
 
   String  generateHeader (String token) ;
 
-  String endpointLink ;
-  String loginQuery;
-  String logoutQuery;
-  String getProfileQuery;
-  String forgetPasswordQuery;
+  String? endpointLink ;
+  String? loginQuery;
+  String? logoutQuery;
+  String? getProfileQuery;
+  String? forgetPasswordQuery;
 
-  GraphQLClient graphQLClient({String endpoint , String token}) ;
-  Future<QueryResult> graphQLClientRequest({String queryDoc , Map<String , dynamic> args, String token}) ;
+  GraphQLClient graphQLClient({String? endpoint , String? token}) ;
+  Future<QueryResult> graphQLClientRequest({String? queryDoc , Map<String , dynamic>? args, String? token}) ;
 
 
 

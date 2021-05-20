@@ -41,7 +41,7 @@ class MasterSubscription extends StatelessWidget {
 
   Widget subsPlansGrid(){
     
-    List<MasterPlansModel > subsPlans = List();
+    List<MasterPlansModel > subsPlans = List.empty(growable: true);
     subsPlans.add(MasterPlansModel(storeName: 'Safi Market' , planType: 'Free Plan',storeType: 'Supermarket',  imgUrl: 'https://static.dw.com/image/42651500_303.jpg'));
     subsPlans.add(MasterPlansModel(storeName: 'Almasa Hotel' , planType: 'Classic Plan',storeType: 'Hotel',  imgUrl: 'http://www.helnan.com/Uploads/images/land_info1.jpg'));
     subsPlans.add(MasterPlansModel(storeName: 'Bobe Barber' , planType: 'Free Plan',storeType: 'Salon',  imgUrl: 'https://airows.com/.image/c_limit%2Ccs_srgb%2Cq_auto:good%2Cw_860/MTM4NTIyNjM5MjE5MTA3MjM5/baxterfinley---2016-best-barber-shopsjpg.webp'));
@@ -80,7 +80,7 @@ class MasterSubscription extends StatelessWidget {
                 children: [
                  ClipRRect(
                    borderRadius: BorderRadius.only(topRight:Radius.circular(17),topLeft: Radius.circular(17)),
-                   child: Image.network(subsPlans[index].imgUrl ,
+                   child: Image.network(subsPlans[index].imgUrl! ,
                      fit: BoxFit.fitWidth,
 
                     ),
@@ -89,13 +89,13 @@ class MasterSubscription extends StatelessWidget {
                    child: Column(
                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                      children: [
-                       Text(subsPlans[index].storeName,style: TextStyle(fontSize: 22 ,fontWeight: FontWeight.w500,color: clrGreen2),),
+                       Text(subsPlans[index].storeName!,style: TextStyle(fontSize: 22 ,fontWeight: FontWeight.w500,color: clrGreen2),),
                        Row(
                          children:[
                            Expanded(child: Divider(thickness: 0.5, color: Colors.black54,height: 0,)),
                            Padding(
                              padding: const EdgeInsets.symmetric(horizontal: 10),
-                             child: Text(subsPlans[index].planType, style: TextStyle(color: Colors.black45),),
+                             child: Text(subsPlans[index].planType!, style: TextStyle(color: Colors.black45),),
                            ),
                            Expanded(child: Divider(thickness: 0.4, color: Colors.black54,height: 0,)),
                          ],),
@@ -104,7 +104,7 @@ class MasterSubscription extends StatelessWidget {
 
                          elevation: 0.9,
                          backgroundColor:Colors.blueAccent ,
-                         label: Text(subsPlans[index].storeType,style: TextStyle(fontSize:13.5 ,color: Colors.white),),
+                         label: Text(subsPlans[index].storeType!,style: TextStyle(fontSize:13.5 ,color: Colors.white),),
                        )
                      ],
                    ),
