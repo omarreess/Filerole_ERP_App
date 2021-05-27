@@ -15,14 +15,14 @@ class AuthIntroScreen extends StatelessWidget {
 
   var options = InAppBrowserClassOptions(
 
-      crossPlatform: InAppBrowserOptions(hideUrlBar: false , toolbarTopBackgroundColor: clrBackground2),
-      android: AndroidInAppBrowserOptions(allowGoBackWithBackButton: true),
+
+      crossPlatform: InAppBrowserOptions(hideUrlBar: true , toolbarTopBackgroundColor: clrBackground2,hideToolbarTop: true ,hidden: false),
+      android: AndroidInAppBrowserOptions(allowGoBackWithBackButton: true,hideTitleBar: true, ),
       inAppWebViewGroupOptions: InAppWebViewGroupOptions(
-
-
-
-          crossPlatform: InAppWebViewOptions(javaScriptEnabled: true,
-          )));
+          crossPlatform: InAppWebViewOptions(
+            javaScriptEnabled: true,
+          ))
+  );
 
 
   @override
@@ -50,17 +50,16 @@ class AuthIntroScreen extends StatelessWidget {
                    Column(
                      children: [
                        Container(
-
-
-
                          margin: EdgeInsets.only(top: constraints.maxHeight*0.1),
                          child: SvgPicture.asset(
 
                              'assets/fileroleic.svg',
-                           color:clrGreen,
-
+                                    color:clrGreen,
                            height: constraints.maxHeight*0.22,
+
                           ),
+
+
                        ),
                        Divider(indent: double.infinity, height: 30,endIndent: double.infinity,) ,
 
@@ -157,14 +156,20 @@ class AuthIntroScreen extends StatelessWidget {
                        splashColor: Colors.white,
 
                        onTap: (){
+                         final MyInAppBrowser browser = new MyInAppBrowser();
+
                          final String url = 'https://filerole.com/register';
-                         MyChromeSafariBrowser().open(
-                             url: Uri.parse(url),
-                             options: ChromeSafariBrowserClassOptions(
+                         browser.openUrlRequest(
+                             urlRequest: URLRequest(url: Uri.parse(url)),
+                             options: options);
 
-                                 android: AndroidChromeCustomTabsOptions(   addDefaultShareMenuItem: false),
-
-                                 ios: IOSSafariOptions(barCollapsingEnabled: true)));
+                         // MyChromeSafariBrowser().open(
+                         //     url: Uri.parse(url),
+                         //     options: ChromeSafariBrowserClassOptions(
+                         //
+                         //         android: AndroidChromeCustomTabsOptions(   addDefaultShareMenuItem: false , showTitle: false),
+                         //
+                         //         ios: IOSSafariOptions(barCollapsingEnabled: true)));
 
                          // MyInAppBrowser().openUrlRequest(
                          //   options: options,
