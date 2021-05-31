@@ -41,6 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("البيانات الشخصية"),
         "master_label_subscriptions":
             MessageLookupByLibrary.simpleMessage("الاشتراكات"),
+        "notifications": MessageLookupByLibrary.simpleMessage("الإشعارات"),
         "password_new":
             MessageLookupByLibrary.simpleMessage("الرقم السري الجديد"),
         "password_old":

@@ -30,7 +30,9 @@
   "change_password": "Change Password",
   "password_old": "Old Password",
   "password_new": "New Password",
-  "password_retype": "Re-Type Password"
+  "password_retype": "Re-Type Password",
+  "notifications":"Notifications"
+ 
 
 
 

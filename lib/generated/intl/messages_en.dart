@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "master_label_profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "master_label_subscriptions":
             MessageLookupByLibrary.simpleMessage("Subscriptions"),
+        "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
         "password_new": MessageLookupByLibrary.simpleMessage("New Password"),
         "password_old": MessageLookupByLibrary.simpleMessage("Old Password"),
         "password_retype":

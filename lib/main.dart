@@ -16,12 +16,13 @@ import 'ui/auth/SavedAcountsScreen.dart';
 import 'ui/intro/IntroSliderScreens.dart';
 import 'ui/auth/AuthIntroScreen.dart';
 import 'ui/master/master_main/MasterMainScreen.dart';
+import 'ui/notifications/notification_screen.dart';
 import 'ui/splash/SplashScreen.dart';
 import 'util/ChangeLangUtil.dart';
 
-void main() async  {
+void main() async {
   Firebase.initializeApp();
-   WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -34,62 +35,47 @@ void main() async  {
 }
 
 class MyApp extends StatelessWidget {
-
-   @override
+  @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (context) => LanguageProvider(),
+      create: (context) => LanguageProvider(),
+      child:
+          Consumer<LanguageProvider>(builder: (context, langProvider, child) {
+        return MaterialApp(
+          //current language
+          locale: Locale(langProvider.languageApp!, ""),
 
+          //place to be localized
+          localizationsDelegates: [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
 
-
-     child: Consumer<LanguageProvider>(
-     builder: (context, langProvider, child) {
-     return  MaterialApp(
-        //current language
-        locale:   Locale(langProvider.languageApp! , ""),
-
-        //place to be localized
-        localizationsDelegates:
-        [
-
-          S.delegate,
-
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-
-
-        supportedLocales: [
+          supportedLocales: [
             Locale(AppLanguages.en.toShortString(), ''), // empty lang code
 
             Locale(AppLanguages.ar.toShortString(), ''), // empty lang code
-        ],
+          ],
 
-        debugShowCheckedModeBanner: false,
-         title: 'Filerole',
-        initialRoute: 'auth_intro',
+          debugShowCheckedModeBanner: false,
+          title: 'Filerole',
+          initialRoute: "master_main",
 
-        routes:appRoutes,
-        theme: ThemeData(
-          textTheme: GoogleFonts.cairoTextTheme(),
-
-          primaryColor: clrGrey,
-
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-
-    );} ),
-     );
+          routes: appRoutes,
+          theme: ThemeData(
+            textTheme: GoogleFonts.cairoTextTheme(),
+            primaryColor: clrGrey,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+          ),
+        );
+      }),
+    );
   }
-
 }
 
-
-
-
-final appRoutes =   {
-
+final appRoutes = {
   'splash': (context) => SplashScreen(),
   'intro': (context) => IntroSliderScreens(),
   'login': (context) => LoginScreen(),
@@ -98,6 +84,5 @@ final appRoutes =   {
 //  'register': (context) => RegisterScreen(),
   'saved_acc': (context) => SavedAccountsScreen(),
   'master_main': (context) => MasterMainScreen(),
-
-
+  'notification': (context) => NotificationScreen(),
 };

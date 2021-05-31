@@ -35,5 +35,7 @@
   "change_password": "تغير الرقم السري",
   "password_old": "الرقم السري القديم",
   "password_new": "الرقم السري الجديد",
-  "password_retype": "الرقم السري الجديد"
+  "password_retype": "الرقم السري الجديد",
+  "notifications":"الإشعارات"
+ 
 }
