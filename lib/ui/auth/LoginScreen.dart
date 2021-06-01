@@ -10,7 +10,10 @@ import 'package:Filerole/util/SaveAccountsSharedPref.dart';
 import 'package:Filerole/util/ToastHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+
+import 'BarWidget.dart';
 
 //testing login
 var data = {
@@ -153,7 +156,6 @@ class _LoginScreenState extends State<LoginScreen> {
     return Column(
       children: [
         Container(
-          //      margin: EdgeInsets.only(top: constraints.maxHeight*0.1),
           child: SvgPicture.asset(
             'assets/fileroleic.svg',
             color: clrGreen,
@@ -184,8 +186,9 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget chooseUserTypeWidget() {
     return Container(
         width: double.infinity,
+        height: 50,
         margin: EdgeInsets.only(left: 20, right: 20),
-        padding: EdgeInsets.symmetric(horizontal: 17),
+        padding: EdgeInsets.symmetric(horizontal: 9),
         decoration: BoxDecoration(
           //     color:Colors.white,
           borderRadius: BorderRadius.circular(20),
@@ -195,53 +198,32 @@ class _LoginScreenState extends State<LoginScreen> {
             Colors.white.withOpacity(0.1)
           ], begin: Alignment.topLeft, end: Alignment.centerRight),
         ),
-        child: DropdownButtonHideUnderline(
-          child: DropdownButton(
-              isExpanded: true,
-              dropdownColor: Colors.grey,
-              iconEnabledColor: Colors.white60,
-              value: userTypeValue,
-              items: [
-                DropdownMenuItem(
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.supervised_user_circle_outlined,
-                        color: Colors.white70,
+        child: TextButton(
+          onPressed: () {
+            showChooseTypeSheet(context);
+          },
+          child: TextFormField(
+            enabled: false,
+            // controller: controller,
+
+            onSaved: (password) {
+              myAuthModel.password = password;
+            },
+            decoration: InputDecoration(
+              suffixIcon: Icon(
+                Icons.arrow_drop_down,
+                color: Colors.white38,
+              ),
+              icon:
+                  Icon(Icons.supervisor_account_outlined, color: Colors.white70
+
+                      //  color: kPrim//aryColor,
                       ),
-                      VerticalDivider(
-                        color: Colors.transparent,
-                        width: 12,
-                      ),
-                      Text(
-                        "Owner",
-                        style: TextStyle(color: Colors.white70),
-                      ),
-                    ],
-                  ),
-                  value: 0,
-                ),
-                DropdownMenuItem(
-                  child: Row(
-                    children: [
-                      Icon(Icons.account_circle_outlined,
-                          color: Colors.white70),
-                      VerticalDivider(
-                        color: Colors.transparent,
-                        width: 12,
-                      ),
-                      Text("Stuff", style: TextStyle(color: Colors.white70)),
-                    ],
-                  ),
-                  value: 1,
-                ),
-              ],
-              onChanged: (dynamic value) {
-                setState(() {
-                  myAuthModel.userType = value;
-                  userTypeValue = value;
-                });
-              }),
+              hintText: myAuthModel.userType,
+              hintStyle: TextStyle(color: Colors.white70),
+              border: InputBorder.none,
+            ),
+          ),
         ));
   }
 
@@ -303,7 +285,7 @@ class _LoginScreenState extends State<LoginScreen> {
         onEditingComplete: myFocusNode!.nextFocus,
 
         decoration: InputDecoration(
-            icon: Icon(Icons.supervisor_account_outlined,
+            icon: Icon(Icons.email_rounded,
                 //  color: kPrim//aryColor,
                 color: Colors.white70),
             //hintText: hintText,
@@ -426,8 +408,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   'Saved Accounts',
                   style: TextStyle(
                       color: Colors.white,
-                      height: 1.6,
-                      fontSize: 15,
+                      height: 1,
+                      fontSize: 13,
                       fontWeight: FontWeight.normal),
                 ),
               ],
@@ -519,4 +501,101 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void toStaffScreen() {}
+
+  void showChooseTypeSheet(BuildContext context) {
+    showModalBottomSheet(
+        backgroundColor: Colors.transparent,
+        context: context,
+        builder: (context) => Container(
+              height: 220,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(25),
+                      topRight: Radius.circular(25))),
+              child: Column(
+                children: [
+                  BtmSheetBar(),
+                  Divider(
+                    height: 15,
+                    color: Colors.transparent,
+                  ),
+                  Text('Choose User Type',
+                      style: TextStyle(
+                          fontSize: 20,
+                          height: 1,
+                          color: Colors.black54,
+                          fontWeight: FontWeight.bold)),
+                  Divider(
+                    height: 30,
+                    color: Colors.grey.shade400,
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 100.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          TextButton(
+                            onPressed: () {
+                              assignUserType(0, context);
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Image.asset(
+                                  'assets/boss.png',
+                                  width: 40,
+                                  height: 40,
+                                ),
+                                Text("Owner",
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                        height: 1,
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.black45,
+                                        fontSize: 18)),
+                              ],
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              assignUserType(1, context);
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Image.asset(
+                                  'assets/stuff.png',
+                                  width: 40,
+                                  height: 40,
+                                ),
+                                Text("Stuff",
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                        height: 1,
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.black45,
+                                        fontSize: 18)),
+                              ],
+                            ),
+                          ),
+                          Divider(
+                            height: 10,
+                            color: Colors.transparent,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ));
+  }
+
+  void assignUserType(int typeIndex, BuildContext context) {
+    myAuthModel.userType = typeIndex;
+    Navigator.pop(context);
+    setState(() {});
+  }
 }

@@ -61,11 +61,14 @@ class MyApp extends StatelessWidget {
 
           debugShowCheckedModeBanner: false,
           title: 'Filerole',
-          initialRoute: "master_main",
+          initialRoute: "login",
 
           routes: appRoutes,
           theme: ThemeData(
-            textTheme: GoogleFonts.cairoTextTheme(),
+            textTheme:
+                (langProvider.languageApp! == AppLanguages.en.toShortString())
+                    ? GoogleFonts.robotoTextTheme()
+                    : GoogleFonts.cairoTextTheme(),
             primaryColor: clrGrey,
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),

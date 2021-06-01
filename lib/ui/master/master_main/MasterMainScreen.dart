@@ -367,12 +367,12 @@ class _MasterMainScreenState extends State<MasterMainScreen>
       //if index <4 means it's change language buttons
 
       onPressed: () {
+        Navigator.pop(context);
         if (index < 4) {
           tabController!.animateTo((index));
         } else if (index == 4) {
           Navigator.pushNamed(context, 'notification');
         }
-        ;
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
