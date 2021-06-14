@@ -1,5 +1,7 @@
-import 'package:Filerole/model/Constants.dart';
+import 'package:Filerole/model/constants/Constants.dart';
 import 'package:Filerole/model/MasterAccountModel.dart';
+import 'package:Filerole/model/database/save_accounts_db.dart';
+import 'package:Filerole/ui/notifications/notification_screen.dart';
 import 'package:Filerole/util/SaveAccountsSharedPref.dart';
 import 'package:flutter/material.dart';
 
@@ -12,10 +14,10 @@ class SavedAccountsScreen extends StatefulWidget {
 }
 
 class _SavedAccountsScreenState extends State<SavedAccountsScreen> {
+  var acountsDb = SavedAccountsDb();
+
   List<MasterAccountModel> masterAccountsArr = List.empty(growable: true);
-  Map<String, dynamic>? userMap;
-  SharedPreferences? prefs;
-  late SaveAccountsSharedPref prefss;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -129,9 +131,10 @@ class _SavedAccountsScreenState extends State<SavedAccountsScreen> {
                   ),
                   key: UniqueKey(),
                   onDismissed: (direction) async {
-                    prefss.deleteingAccounts(index);
+                    //  prefss.deleteingAccounts(index);
 
                     setState(() {
+                     acountsDb.removeAccount(masterAccountsArr[index]);
                       masterAccountsArr.removeAt(index);
                     });
                   },
@@ -142,7 +145,7 @@ class _SavedAccountsScreenState extends State<SavedAccountsScreen> {
                       width: 80,
                     ),
                     title: Text(
-                      masterAccountsArr[index].storeName!,
+                      masterAccountsArr[index].name!,
                       style: TextStyle(fontSize: 20),
                     ),
                     subtitle: Text(masterAccountsArr[index].domain!,
@@ -174,31 +177,19 @@ class _SavedAccountsScreenState extends State<SavedAccountsScreen> {
         textColor: Colors.white, //button text and icon color.
         color: clrGreen3, //button background color
         onPressed: () {
-          setState(() {});
+          Navigator.pushNamed(context, 'login');
         },
       ),
     );
   }
 
   Future<bool> gettingData() async {
-    prefss = SaveAccountsSharedPref();
-    await prefss.initShPref();
-
-    if (prefss.checkDataExist()) {
-      userMap = prefss.getSavedAccounts();
-
-      userMap!.forEach((key, value) {
-        masterAccountsArr
-          ..add(MasterAccountModel(
-              domain: value['domain'],
-              storeName: value['storeName'],
-              img: value['img']));
-      });
-
-      return true;
-    } else {
+    masterAccountsArr = acountsDb.getSavedAccounts();
+    if (masterAccountsArr.isEmpty) {
       //data  not saved  yet
       return false;
+    } else {
+      return true;
     }
   }
 }

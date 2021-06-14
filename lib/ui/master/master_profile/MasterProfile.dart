@@ -1,5 +1,5 @@
 import 'package:Filerole/generated/l10n.dart';
-import 'package:Filerole/model/Constants.dart';
+import 'package:Filerole/model/constants/Constants.dart';
 import 'package:Filerole/model/MasterAccountModel.dart';
 import 'package:Filerole/model/MasterProfileDetailsModel.dart';
 import 'package:Filerole/ui/master/master_main/MasterMainScreen.dart';

@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:Filerole/generated/l10n.dart';
-import 'package:Filerole/model/Constants.dart';
+import 'package:Filerole/model/constants/Constants.dart';
 import 'package:Filerole/model/MasterPaymentModel.dart';
 import 'package:Filerole/model/MasterPlansModel.dart';
 import 'package:Filerole/ui/auth/LoginScreen.dart';

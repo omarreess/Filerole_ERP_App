@@ -1,5 +1,6 @@
-import 'package:Filerole/model/Constants.dart';
-import 'package:Filerole/model/LanguageProvider.dart';
+import 'package:Filerole/model/constants/Constants.dart';
+import 'package:Filerole/model/database/save_accounts_db.dart';
+import 'package:Filerole/model/providers/LanguageProvider.dart';
 import 'package:Filerole/model/LoginAuthModel.dart';
 import 'package:Filerole/networking/graphql/authentication/AuthInterface.dart';
 
@@ -397,7 +398,7 @@ class _LoginScreenState extends State<LoginScreen> {
               color: Colors.blueGrey),
           child: FlatButton(
             onPressed: () {
-              SaveAccountsSharedPref().savingAccount();
+               
 
               Navigator.pushNamed(context, 'saved_acc');
             },
@@ -467,18 +468,22 @@ class _LoginScreenState extends State<LoginScreen> {
       if (checkNetworkResponseStatusCode(response)) {
         //checking User Type
         if (response?['userType'] == 'owner') {
-          StaticUserVar.userAccount.accessToken = response?['token'];
-          StaticUserVar.userAccount.name =
-              response?['user']['name'] + ' ' + response?['user']['name_en'];
-          StaticUserVar.userAccount.firstName = response?['user']['name'];
-          StaticUserVar.userAccount.lastName = response?['user']['name_en'];
-          StaticUserVar.userAccount.email = response?['user']['email'];
-          StaticUserVar.userAccount.phoneNumber =
-              response?['user']['phone_number'].toString();
-          StaticUserVar.userAccount.img = response?['user']['social_image'];
+          StaticUserVar.userAccount
+          ..accessToken = response?['token']
+          ..domain = response?['url']
+          ..name =   response?['user']['name'] + ' ' + response?['user']['name_en']
+          ..firstName = response?['user']['name']
+          ..lastName = response?['user']['name_en']
+          ..email = response?['user']['email']
+          ..phoneNumber =  response?['user']['phone_number'].toString()
+          ..img = response?['user']['social_image'];
 
-          createToast(response?['message'],
-              colour: Colors.greenAccent.withOpacity(0.6));
+          createToast(response?['message'], colour: Colors.greenAccent.withOpacity(0.6));
+          
+          //save account in Local Db
+          SavedAccountsDb()..addAccount(StaticUserVar.userAccount);
+           
+
           toMasterScreen();
         } else {
           toStaffScreen();

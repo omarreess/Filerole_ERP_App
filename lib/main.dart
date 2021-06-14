@@ -5,11 +5,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
-
 import 'generated/l10n.dart';
-import 'model/Constants.dart';
-import 'model/LanguageProvider.dart';
-
+import 'model/constants/Constants.dart';
+import 'model/database/save_accounts_db.dart';
+import 'model/providers/LanguageProvider.dart';
 import 'ui/auth/ForgetPasswordScreen.dart';
 import 'ui/auth/LoginScreen.dart';
 import 'ui/auth/SavedAcountsScreen.dart';
@@ -21,15 +20,21 @@ import 'ui/splash/SplashScreen.dart';
 import 'util/ChangeLangUtil.dart';
 
 void main() async {
-  Firebase.initializeApp();
   WidgetsFlutterBinding.ensureInitialized();
+
+  //init Firebase for Cloud Msg
+  Firebase.initializeApp();
+
+  //init Hive Database Boxes
+  SavedAccountsDb() .. initHiveDB(); 
+   
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
 
-  //cashe
-  await initHiveForFlutter();
+  //cashe for graphQL
+  // await initHiveForFlutter();
 
   runApp(MyApp());
 }

@@ -1,5 +1,5 @@
 import 'package:Filerole/generated/l10n.dart';
-import 'package:Filerole/model/Constants.dart';
+import 'package:Filerole/model/constants/Constants.dart';
 import 'package:Filerole/model/NotifyModel.dart';
 import 'package:flutter/material.dart';
 

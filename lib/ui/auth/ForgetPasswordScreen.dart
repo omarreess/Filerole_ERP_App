@@ -1,5 +1,5 @@
-import 'package:Filerole/model/Constants.dart';
-import 'package:Filerole/model/LanguageProvider.dart';
+import 'package:Filerole/model/constants/Constants.dart';
+import 'package:Filerole/model/providers/LanguageProvider.dart';
 import 'package:Filerole/model/LoginAuthModel.dart';
 import 'package:Filerole/networking/graphql/authentication/AuthInterface.dart';
 

@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:Filerole/generated/l10n.dart';
-import 'package:Filerole/model/Constants.dart';
-import 'package:Filerole/model/LanguageProvider.dart';
+import 'package:Filerole/model/constants/Constants.dart';
+import 'package:Filerole/model/providers/LanguageProvider.dart';
 import 'package:Filerole/model/MasterAccountModel.dart';
 import 'package:Filerole/networking/graphql/authentication/MasterAuth.dart';
 import 'package:Filerole/networking/restful/client/master_client.dart';
