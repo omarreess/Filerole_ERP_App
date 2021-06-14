@@ -4,7 +4,8 @@ import 'package:Filerole/generated/l10n.dart';
 import 'package:Filerole/model/Constants.dart';
 import 'package:Filerole/model/LanguageProvider.dart';
 import 'package:Filerole/model/MasterAccountModel.dart';
-import 'package:Filerole/networking/authentication/MasterAuth.dart';
+import 'package:Filerole/networking/graphql/authentication/MasterAuth.dart';
+import 'package:Filerole/networking/restful/client/master_client.dart';
 import 'package:Filerole/ui/master/master_profile/MasterProfile.dart';
 import 'package:Filerole/ui/master/payment_method/MasterPaymentMethod.dart';
 import 'package:Filerole/ui/master/payments/MasterPayments.dart';
@@ -12,6 +13,7 @@ import 'package:Filerole/ui/master/subscriptions/MasterSubscription.dart';
 import 'package:Filerole/util/ChangeLangUtil.dart';
 import 'package:Filerole/util/GettingVersionCode.dart';
 import 'package:Filerole/util/ToastHelper.dart';
+import 'package:Filerole/util/check_network_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +21,11 @@ import 'package:provider/provider.dart';
 class StaticUserVar {
 //app lifetime var contain user's token .....
   static MasterAccountModel userAccount = MasterAccountModel();
+}
+
+class StaticMasterClient {
+//app lifetime var respobile for  Master Client
+  static MasterClient client = MasterClient();
 }
 
 class MasterMainScreen extends StatefulWidget {
@@ -205,7 +212,7 @@ class _MasterMainScreenState extends State<MasterMainScreen>
                 child: Container(
                   height: 100,
                   child: Image.network(
-                    'https://instagram.fcai21-2.fna.fbcdn.net/v/t51.2885-15/e15/s320x320/11257032_692162207576745_1286537254_n.jpg?tp=1&_nc_ht=instagram.fcai21-2.fna.fbcdn.net&_nc_cat=109&_nc_ohc=TNm79m_HHyIAX-GRepl&oh=e6f61ba9f928ee4e85f776c74958f16f&oe=607A40CD',
+                  StaticUserVar.userAccount.img!,
                   ),
                 ),
               ),
@@ -214,7 +221,7 @@ class _MasterMainScreenState extends State<MasterMainScreen>
                 color: Colors.transparent,
               ),
               Text(
-                "Mohamed Ayman",
+               StaticUserVar.userAccount.name??'User',
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -400,21 +407,39 @@ class _MasterMainScreenState extends State<MasterMainScreen>
   }
 
   void logoutUser() {
-    final authState = MasterAuth();
-    authState
-        .graphQLClientRequest(
-            queryDoc: authState.getProfileQuery,
-            token: StaticUserVar.userAccount.token
-            //  StaticUserVar. userAccount.token
-            )
-        .then((response) {
-      createToast('Bye ${StaticUserVar.userAccount.name} ${response.data}');
-      //  Toast.show( 'Bye ${StaticUserVar.  userAccount.name} ${response.data }', context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
-      toLoginScreen();
-    }).catchError((error) {
-      createToast('Error Occured ');
-      //  Toast.show( 'Error Occured ', context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
-    });
+    StaticMasterClient.client
+        .logoutService(token: StaticUserVar.userAccount.accessToken)
+        .then(
+          (response) {
+          // checking status code
+         if (checkNetworkResponseStatusCode(response)) 
+         {
+         StaticUserVar.userAccount.accessToken = '';
+        createToast(response?['message'], colour: Colors.greenAccent.withOpacity(0.6));
+        toLoginScreen();
+        }
+         else{
+           createToast(response?['errors']??'Something went wrong', colour: Colors.red.withOpacity(0.6));
+
+         } 
+      
+    }
+    );
+    // final authState = MasterAuth();
+    // authState
+    //     .graphQLClientRequest(
+    //         queryDoc: authState.getProfileQuery,
+    //         token: StaticUserVar.userAccount.accessToken
+    //         //  StaticUserVar. userAccount.token
+    //         )
+    //     .then((response) {
+    //   createToast('Bye ${StaticUserVar.userAccount.name} ${response.data}');
+    //   //  Toast.show( 'Bye ${StaticUserVar.  userAccount.name} ${response.data }', context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+    //   toLoginScreen();
+    // }).catchError((error) {
+    //   createToast('Error Occured ');
+    //   //  Toast.show( 'Error Occured ', context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+    // });
   }
 
   void toLoginScreen() {

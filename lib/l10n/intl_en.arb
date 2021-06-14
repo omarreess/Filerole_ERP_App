@@ -31,7 +31,11 @@
   "password_old": "Old Password",
   "password_new": "New Password",
   "password_retype": "Re-Type Password",
-  "notifications":"Notifications"
+  "notifications":"Notifications" , 
+   "date":"Date",
+   "duration":"Duration",
+   "cost":"Date"
+    
  
 
 

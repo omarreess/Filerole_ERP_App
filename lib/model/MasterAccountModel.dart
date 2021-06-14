@@ -5,17 +5,18 @@ class MasterAccountModel {
   String? storeName;
   String? domain;
   String? img;
-  String? token ;
+  String? accessToken ;
   String? id;
   String? name;
+  String? lastName;
+  String? firstName;
   String? email;
   String? phoneNumber;
   String? address;
   String? endpoint;
   String?   subscriptions;
   String?   userType;
-
-  MasterAccountModel({
+   MasterAccountModel({
     this.name,
     this.email,
     this.phoneNumber,
@@ -26,7 +27,9 @@ class MasterAccountModel {
     this.domain,
     this.endpoint,
     this.storeName,
-    this.token,
+    this.firstName,
+    this.lastName,
+    this.accessToken,
   this.userType
   });
 }

@@ -309,6 +309,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Date`
+  String get date {
+    return Intl.message(
+      'Date',
+      name: 'date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Duration`
+  String get duration {
+    return Intl.message(
+      'Duration',
+      name: 'duration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date`
+  String get cost {
+    return Intl.message(
+      'Date',
+      name: 'cost',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

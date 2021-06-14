@@ -1,16 +1,15 @@
 import 'package:Filerole/model/Constants.dart';
 import 'package:Filerole/model/LanguageProvider.dart';
 import 'package:Filerole/model/LoginAuthModel.dart';
-import 'package:Filerole/model/MasterAccountModel.dart';
-import 'package:Filerole/networking/authentication/AuthInterface.dart';
-import 'package:Filerole/networking/authentication/MasterAuth.dart';
+import 'package:Filerole/networking/graphql/authentication/AuthInterface.dart';
+
+import 'package:Filerole/networking/graphql/authentication/MasterAuth.dart';
 import 'package:Filerole/ui/master/master_main/MasterMainScreen.dart';
-import 'package:Filerole/util/ChangeLangUtil.dart';
 import 'package:Filerole/util/SaveAccountsSharedPref.dart';
 import 'package:Filerole/util/ToastHelper.dart';
+import 'package:Filerole/util/check_network_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'BarWidget.dart';
@@ -35,6 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
   FocusScopeNode? myFocusNode;
   LoginAuthModel myAuthModel = LoginAuthModel();
   bool showProgressBar = false;
+  bool showPass = true;
 
   @override
   void initState() {
@@ -316,11 +316,20 @@ class _LoginScreenState extends State<LoginScreen> {
         onSaved: (password) {
           myAuthModel.password = password;
         },
-        obscureText: true,
+        obscureText: showPass,
+        style: TextStyle(color: Colors.white70),
+
         decoration: InputDecoration(
-          suffixIcon: Icon(
-            Icons.remove_red_eye,
-            color: Colors.white38,
+          suffixIcon: IconButton(
+            onPressed: () {
+              setState(() {
+                (showPass) ? showPass = false : showPass = true;
+              });
+            },
+            icon: Icon(
+              Icons.remove_red_eye,
+              color: Colors.white38,
+            ),
           ),
           icon: Icon(Icons.lock_outline, color: Colors.white70
 
@@ -438,57 +447,102 @@ class _LoginScreenState extends State<LoginScreen> {
                 fontWeight: FontWeight.normal),
           ),
         ),
-        onTap: () {},
+        onTap: () {
+          toForgetPassScreen();
+        },
       ),
     );
   }
 
   void checkingNetworkRequest() async {
-    loginAuth.graphQLClientRequest(queryDoc: loginAuth.loginQuery, args: {
-      "email": myAuthModel.email,
-      "pass": myAuthModel.password,
-      "url": myAuthModel.serverUrl,
-      "userType": myAuthModel.userType,
-    }).then((response) {
-      if (response.isNotLoading) {
-        createToast('Type Correct Data ');
-        // Toast.show( 'Type Correct Data ', context, duration: Toast.LENGTH_LONG,backgroundColor: Colors.red.withOpacity(0.5) ,  gravity:  Toast.BOTTOM);
+    await StaticMasterClient.client
+        .loginService(
+      mail: myAuthModel.email!,
+      pass: myAuthModel.password!,
+      serverUrl: myAuthModel.serverUrl!,
+      type: myAuthModel.userType!,
+    )
+        .then((response) {
+      // checking status code
+      if (checkNetworkResponseStatusCode(response)) {
+        //checking User Type
+        if (response?['userType'] == 'owner') {
+          StaticUserVar.userAccount.accessToken = response?['token'];
+          StaticUserVar.userAccount.name =
+              response?['user']['name'] + ' ' + response?['user']['name_en'];
+          StaticUserVar.userAccount.firstName = response?['user']['name'];
+          StaticUserVar.userAccount.lastName = response?['user']['name_en'];
+          StaticUserVar.userAccount.email = response?['user']['email'];
+          StaticUserVar.userAccount.phoneNumber =
+              response?['user']['phone_number'].toString();
+          StaticUserVar.userAccount.img = response?['user']['social_image'];
 
-      }
-
-      if (response.data!['login']['status'].toString() == "200") {
-        StaticUserVar.userAccount.token = response.data!['login']['token'];
-        StaticUserVar.userAccount.email =
-            response.data!['login']['user']['email'];
-        StaticUserVar.userAccount.name =
-            response.data!['login']['user']['name'];
-        StaticUserVar.userAccount.phoneNumber =
-            response.data!['login']['user']['phone_number'];
-        StaticUserVar.userAccount.address =
-            response.data!['login']['user']['address'];
-        StaticUserVar.userAccount.userType =
-            response.data!['login']['userType'];
-        StaticUserVar.userAccount.endpoint =
-            response.data!['login']['endPoint'];
-
-        createToast(
-            'Login success ${StaticUserVar.userAccount.endpoint} ${response.data!['login']['user']['email']}');
-        // Toast.show( 'Login success ${StaticUserVar.  userAccount.endpoint} ${response.data ['login']['user']['email']}', context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
-
-        if (StaticUserVar.userAccount.userType == "owner") {
+          createToast(response?['message'],
+              colour: Colors.greenAccent.withOpacity(0.6));
           toMasterScreen();
+        } else {
+          toStaffScreen();
         }
-        return;
+      } else {
+        createToast(response?['errors'] ?? 'Something went wrong!',
+            colour: Colors.red.withOpacity(0.6));
       }
-      setState(() {
-        showProgressBar = false;
-      });
-    }).catchError((n) {
-      // Toast.show( 'Error occurred ', context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
-      setState(() {
-        showProgressBar = false;
-      });
+    }).catchError((error) {
+      //  createToast(error.toString());
+      createToast('Check your network connection');
     });
+    setState(() {
+      showProgressBar = false;
+    });
+    //GrapQl
+    // loginAuth.graphQLClientRequest(queryDoc: loginAuth.loginQuery, args: {
+    //   "email": myAuthModel.email,
+    //   "pass": myAuthModel.password,
+    //   "url": myAuthModel.serverUrl,
+    //   "userType": myAuthModel.userType,
+    // }).then((response) {
+    //   if (response.isNotLoading) {
+    //     createToast('Type Correct Data ');
+    //     // Toast.show( 'Type Correct Data ', context, duration: Toast.LENGTH_LONG,backgroundColor: Colors.red.withOpacity(0.5) ,  gravity:  Toast.BOTTOM);
+    //   setState(() {
+    //     showProgressBar = false;
+    //   });
+
+    //   }
+
+    //   if (response.data!['login']['status'].toString() == "200") {
+    //     StaticUserVar.userAccount.accessToken = response.data!['login']['token'];
+    //     StaticUserVar.userAccount.email =
+    //         response.data!['login']['user']['email'];
+    //     StaticUserVar.userAccount.name =
+    //         response.data!['login']['user']['name'];
+    //     StaticUserVar.userAccount.phoneNumber =
+    //         response.data!['login']['user']['phone_number'];
+    //     StaticUserVar.userAccount.address =
+    //         response.data!['login']['user']['address'];
+    //     StaticUserVar.userAccount.userType =
+    //         response.data!['login']['userType'];
+    //     StaticUserVar.userAccount.endpoint =
+    //         response.data!['login']['endPoint'];
+
+    //     createToast(
+    //         'Login success ${StaticUserVar.userAccount.endpoint} ${response.data!['login']['user']['email']}');
+    //     // Toast.show( 'Login success ${StaticUserVar.  userAccount.endpoint} ${response.data ['login']['user']['email']}', context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+
+    //     if (StaticUserVar.userAccount.userType == "owner") {
+    //       toMasterScreen();
+    //     }
+    //     return;
+    //   }
+    //   setState(() {
+    //     showProgressBar = false;
+    //   });
+    // }).catchError((n) {
+    //   // Toast.show( 'Error occurred ', context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+    //   setState(() {
+    //     showProgressBar = false;
+    //   });
+    // });
   }
 
   void toMasterScreen() {
@@ -498,6 +552,10 @@ class _LoginScreenState extends State<LoginScreen> {
         .then((value) {
       Navigator.pushReplacementNamed(context, 'master_main');
     });
+  }
+
+  void toForgetPassScreen() {
+    Navigator.pushReplacementNamed(context, 'forget_pass');
   }
 
   void toStaffScreen() {}

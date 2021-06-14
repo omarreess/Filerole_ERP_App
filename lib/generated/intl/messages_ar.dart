@@ -28,6 +28,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "change_lang": MessageLookupByLibrary.simpleMessage("تغير اللغة"),
         "change_password":
             MessageLookupByLibrary.simpleMessage("تغير الرقم السري"),
+        "cost": MessageLookupByLibrary.simpleMessage("التكلفة"),
+        "date": MessageLookupByLibrary.simpleMessage("التاريخ"),
+        "duration": MessageLookupByLibrary.simpleMessage("الفترة"),
         "email": MessageLookupByLibrary.simpleMessage("البريد الاكتروني"),
         "expiry_date":
             MessageLookupByLibrary.simpleMessage("تاريخ انتهاء الصلاحية"),

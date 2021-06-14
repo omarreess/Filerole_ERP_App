@@ -10,8 +10,8 @@ import 'generated/l10n.dart';
 import 'model/Constants.dart';
 import 'model/LanguageProvider.dart';
 
+import 'ui/auth/ForgetPasswordScreen.dart';
 import 'ui/auth/LoginScreen.dart';
-import 'ui/auth/RegisterScreen.dart';
 import 'ui/auth/SavedAcountsScreen.dart';
 import 'ui/intro/IntroSliderScreens.dart';
 import 'ui/auth/AuthIntroScreen.dart';
@@ -54,9 +54,10 @@ class MyApp extends StatelessWidget {
           ],
 
           supportedLocales: [
+            
             Locale(AppLanguages.en.toShortString(), ''), // empty lang code
-
             Locale(AppLanguages.ar.toShortString(), ''), // empty lang code
+
           ],
 
           debugShowCheckedModeBanner: false,
@@ -65,11 +66,13 @@ class MyApp extends StatelessWidget {
 
           routes: appRoutes,
           theme: ThemeData(
+            
             textTheme:
                 (langProvider.languageApp! == AppLanguages.en.toShortString())
-                    ? GoogleFonts.robotoTextTheme()
+                    ? GoogleFonts.robotoTextTheme(TextTheme())
                     : GoogleFonts.cairoTextTheme(),
             primaryColor: clrGrey,
+            
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
         );
@@ -80,11 +83,12 @@ class MyApp extends StatelessWidget {
 
 final appRoutes = {
   'splash': (context) => SplashScreen(),
-  'intro': (context) => IntroSliderScreens(),
+  'intro' : (context) => IntroSliderScreens(),
   'login': (context) => LoginScreen(),
+  'forget_pass': (context) => ForgetPasswordScreen(),
 
   'auth_intro': (context) => AuthIntroScreen(),
-//  'register': (context) => RegisterScreen(),
+//'register': (context) => RegisterScreen(),
   'saved_acc': (context) => SavedAccountsScreen(),
   'master_main': (context) => MasterMainScreen(),
   'notification': (context) => NotificationScreen(),

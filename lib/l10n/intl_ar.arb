@@ -36,6 +36,9 @@
   "password_old": "الرقم السري القديم",
   "password_new": "الرقم السري الجديد",
   "password_retype": "الرقم السري الجديد",
-  "notifications":"الإشعارات"
+  "notifications":"الإشعارات", 
+   "date":"التاريخ",
+   "duration":"الفترة",
+   "cost":"التكلفة"
  
 }
