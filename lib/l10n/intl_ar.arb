@@ -1,0 +1,44 @@
+{
+
+  "master_label_subscriptions": "الاشتراكات",
+  "master_label_payments": "المدفوعات",
+  "master_label_profile": "البيانات الشخصية",
+  "master_label_payment_method": "طرق الدفع",
+  "change_lang": "تغير اللغة",
+
+
+  "sort_by": "رتب حسب",
+  "sort_by_date": "أضيف حديثا",
+  "sort_by_highpaid": "اعلي المدفوعات",
+  "sort_by_lowpaid": "اقل المدفوعات",
+
+  "payments": "المدفوعات",
+
+
+  "plans": "خطط اشتراكاتي",
+
+
+  "ccv": "الكود السري",
+  "expiry_date": "تاريخ انتهاء الصلاحية",
+  "card_name": "الاسم",
+  "card_number": "رقم البطاقة",
+
+  "first_name": "الاسم الاول",
+  "last_time": "الاسم العائلة",
+  "email": "البريد الاكتروني",
+  "phone_number": "رقم الهاتف",
+
+
+  "add_card": "اضف الكارت",
+
+  "save_edits": "حفط التغيرات",
+  "change_password": "تغير الرقم السري",
+  "password_old": "الرقم السري القديم",
+  "password_new": "الرقم السري الجديد",
+  "password_retype": "الرقم السري الجديد",
+  "notifications":"الإشعارات", 
+   "date":"التاريخ",
+   "duration":"الفترة",
+   "cost":"التكلفة"
+ 
+}

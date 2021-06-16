@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="16px" height="16px" viewBox="0 0 16 16" id="svg2" version="1.1" inkscape:version="0.91 r13725" sodipodi:docname="12.svg">
+  <defs id="defs4">
+    <pattern y="0" x="0" height="6" width="6" patternUnits="userSpaceOnUse" id="EMFhbasepattern"/>
+    <pattern y="0" x="0" height="6" width="6" patternUnits="userSpaceOnUse" id="EMFhbasepattern-4"/>
+    <pattern y="0" x="0" height="6" width="6" patternUnits="userSpaceOnUse" id="EMFhbasepattern-3"/>
+  </defs>
+  <sodipodi:namedview id="base" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:zoom="15.839192" inkscape:cx="-5.9065249" inkscape:cy="10.317328" inkscape:document-units="px" inkscape:current-layer="layer1" showgrid="true" units="px" inkscape:window-width="1366" inkscape:window-height="715" inkscape:window-x="-8" inkscape:window-y="-8" inkscape:window-maximized="1" inkscape:snap-bbox="true" inkscape:bbox-paths="true" inkscape:bbox-nodes="true" inkscape:snap-bbox-edge-midpoints="true" inkscape:snap-bbox-midpoints="true">
+    <inkscape:grid type="xygrid" id="grid3336"/>
+  </sodipodi:namedview>
+  
+  <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1" transform="translate(0,-1036.3622)">
+    <path style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;baseline-shift:baseline;text-anchor:start;white-space:normal;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.94077569;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" d="M 13.634766 0.10742188 A 0.47043489 0.47043489 0 0 0 13.171875 0.58398438 L 13.171875 1.9960938 L 11.759766 1.9960938 A 0.47043489 0.47043489 0 0 0 11.712891 1.9960938 A 0.47043489 0.47043489 0 0 0 11.759766 2.9355469 L 13.171875 2.9355469 L 13.171875 4.3476562 A 0.47043489 0.47043489 0 1 0 14.111328 4.3476562 L 14.111328 2.9355469 L 15.523438 2.9355469 A 0.47043489 0.47043489 0 1 0 15.523438 1.9960938 L 14.111328 1.9960938 L 14.111328 0.58398438 A 0.47043489 0.47043489 0 0 0 13.634766 0.10742188 z M 6.5859375 2.0019531 C 4.773005 2.0019531 3.2929859 3.4820219 3.2929688 5.2949219 C 3.2929859 7.1079219 4.773005 8.5878906 6.5859375 8.5878906 C 8.39887 8.5878906 9.8788891 7.1079219 9.8789062 5.2949219 C 9.878889 3.4820219 8.39887 2.0019531 6.5859375 2.0019531 z M 6.5859375 2.9433594 C 7.8904402 2.9433594 8.9374876 3.9904219 8.9375 5.2949219 C 8.9374876 6.5995219 7.8904402 7.6464844 6.5859375 7.6464844 C 5.2814348 7.6464844 4.2343874 6.5995219 4.234375 5.2949219 C 4.2343874 3.9904219 5.2814348 2.9433594 6.5859375 2.9433594 z M 6.5859375 9.5273438 C 2.9845857 9.5273438 1.1842379e-015 12.006975 0 15.171875 L 0.94140625 15.171875 C 0.94140625 12.603775 3.411823 10.46875 6.5859375 10.46875 C 9.7600516 10.46875 12.230469 12.603775 12.230469 15.171875 L 13.169922 15.171875 C 13.169922 12.006975 10.187289 9.5273438 6.5859375 9.5273438 z " transform="translate(0,1036.3622)" id="circle6277"/>
+  </g>
+
+	
+	
+	
+	<metadata>
+		<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+			<rdf:Description about="https://iconscout.com/legal#licenses" dc:title="User, Add, Plus, Contact, Account, New, Create" dc:description="User, Add, Plus, Contact, Account, New, Create" dc:publisher="Iconscout" dc:date="2016-12-14" dc:format="image/svg+xml" dc:language="en">
+				<dc:creator>
+					<rdf:Bag>
+						<rdf:li>Jemis Mali</rdf:li>
+					</rdf:Bag>
+				</dc:creator>
+			</rdf:Description>
+		</rdf:RDF>
+    </metadata></svg>

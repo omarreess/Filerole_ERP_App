@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "594913531179",
+    "project_id": "filerole-a3bb4",
+    "storage_bucket": "filerole-a3bb4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:594913531179:android:862456ba532f5d5bdca16e",
+        "android_client_info": {
+          "package_name": "com.filerole"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "594913531179-77i5mbdjabof99panmb03nsckdn7ngmb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcH3580OPaVAUMRBrdjq-TAWVYjAOIeG4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "594913531179-77i5mbdjabof99panmb03nsckdn7ngmb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:594913531179:android:8032e51da5ed25a8dca16e",
+        "android_client_info": {
+          "package_name": "com.omaressam.filerole_landing_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "594913531179-77i5mbdjabof99panmb03nsckdn7ngmb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcH3580OPaVAUMRBrdjq-TAWVYjAOIeG4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "594913531179-77i5mbdjabof99panmb03nsckdn7ngmb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
