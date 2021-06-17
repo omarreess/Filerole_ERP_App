@@ -28,21 +28,17 @@ class SaveAccountsSharedPref {
         'img':'https://api.time.com/wp-content/uploads/2018/08/thrift-stores.jpg?w=800&quality=85'       ,
         'storeName': ' ${userMap!.length.toString()} Market Shop',
         'domain' :'omar.store.com'  }  ;
-      print('kkkk ${( int.parse(userMap!.keys.last)).toString()}');
-
+ 
       //saving new accounts
       await prefs.setString('userAccounts', jsonEncode(userMap));
       print('aaaa ${userMap!['0']['storeName']} ') ;
     }
     else {
+      
       //setting for 1st time
       _saveForFirstTime();
 
-
-
-
-
-    }
+       }
 
 
 

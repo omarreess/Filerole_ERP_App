@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
 
           debugShowCheckedModeBanner: false,
           title: 'Filerole',
-          initialRoute: "login",
+          initialRoute: "splash",
 
           routes: appRoutes,
           theme: ThemeData(

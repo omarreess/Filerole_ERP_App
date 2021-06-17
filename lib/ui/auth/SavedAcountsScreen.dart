@@ -21,7 +21,7 @@ class _SavedAccountsScreenState extends State<SavedAccountsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: clrGreen5,
+      backgroundColor: clrGreen2,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -175,7 +175,7 @@ class _SavedAccountsScreenState extends State<SavedAccountsScreen> {
           style: TextStyle(fontWeight: FontWeight.bold, wordSpacing: 1.5),
         ), //text to show in button
         textColor: Colors.white, //button text and icon color.
-        color: clrGreen3, //button background color
+        color: Colors.black54, //button background color
         onPressed: () {
           Navigator.pushNamed(context, 'login');
         },
