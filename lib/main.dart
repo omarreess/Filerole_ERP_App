@@ -89,12 +89,12 @@ class MyApp extends StatelessWidget {
 final appRoutes = {
   'splash': (context) => SplashScreen(),
   'intro' : (context) => IntroSliderScreens(),
-  'login': (context) => LoginScreen(),
-  'forget_pass': (context) => ForgetPasswordScreen(),
-
+  'login': (context)        =>    LoginScreen(),
+  'forget_pass': (context)  => ForgetPasswordScreen(),
+  
   'auth_intro': (context)   => AuthIntroScreen(),
   //'register': (context)   => RegisterScreen(),
-  'saved_acc': (context)    => SavedAccountsScreen(),
+  'saved_acc':  (context)   => SavedAccountsScreen(),
   'master_main': (context)  => MasterMainScreen(),
   'notification': (context) => NotificationScreen(),
 };
