@@ -1,7 +1,6 @@
 import 'package:Filerole/generated/l10n.dart';
 import 'package:Filerole/model/constants/Constants.dart';
-import 'package:Filerole/model/MasterAccountModel.dart';
-import 'package:Filerole/model/MasterPlansModel.dart';
+import 'package:Filerole/model/pojo/MasterPlansModel.dart';
 import 'package:Filerole/ui/master/master_main/MasterMainScreen.dart';
 import 'package:Filerole/util/ToastHelper.dart';
 import 'package:Filerole/util/check_network_response.dart';
@@ -20,6 +19,7 @@ class MasterSubscription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('ysta${StaticUserVar.userAccount.accessToken!}');
     getSubscroptionList(token: StaticUserVar.userAccount.accessToken!);
 
     return Container(
@@ -53,13 +53,19 @@ class MasterSubscription extends StatelessWidget {
                     return Expanded(child: subsPlansGrid());
                   }
                   {
-                    return Expanded(child: Container(child: Center(child: CircularProgressIndicator(color: clrGreen3))));
+                    return Expanded(
+                        child: Container(
+                            child: Center(
+                                child: CircularProgressIndicator(
+                                    color: clrGreen3))));
                   }
                 } else {
-                  return  Expanded(child: Container(child: Center(child: CircularProgressIndicator(color: clrGreen3))));
+                  return Expanded(
+                      child: Container(
+                          child: Center(
+                              child: CircularProgressIndicator(
+                                  color: clrGreen3))));
                 }
-
-                 
               }),
         ],
       ),
@@ -67,7 +73,6 @@ class MasterSubscription extends StatelessWidget {
   }
 
   Widget subsPlansGrid() {
-     
     return Padding(
       padding: EdgeInsets.only(top: 10, bottom: 20, left: 12, right: 12),
       child: GridView.builder(
@@ -137,16 +142,14 @@ class MasterSubscription extends StatelessWidget {
                           ],
                         ),
                         Chip(
-                          
                           elevation: 0.9,
                           backgroundColor: Colors.blueAccent,
                           label: Wrap(
                             children: [
                               Text(
                                 subsPlans[index].storeType!,
-                                style:
-                                    TextStyle(fontSize: 13.5, color: Colors.white),
-                                     
+                                style: TextStyle(
+                                    fontSize: 13.5, color: Colors.white),
                               ),
                             ],
                           ),
@@ -175,11 +178,8 @@ class MasterSubscription extends StatelessWidget {
       // checking status code
       if (checkNetworkResponseStatusCode(response)) {
         if (response!['data']['data'] == null) {
-
           dataReady = false;
-
         } else {
- 
           //assigning new Data
           (response['data']['data'] as List).forEach((element) {
             subsPlans.add(MasterPlansModel(
@@ -202,8 +202,9 @@ class MasterSubscription extends StatelessWidget {
       }
     }).catchError((error) {
       //  createToast(error.toString());
-      
+
       createToast(error.toString());
+      print('ysta ${error.toString()}');
       dataReady = false;
     });
   }

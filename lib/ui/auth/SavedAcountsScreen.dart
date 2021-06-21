@@ -1,9 +1,15 @@
 import 'package:Filerole/model/constants/Constants.dart';
-import 'package:Filerole/model/MasterAccountModel.dart';
 import 'package:Filerole/model/database/save_accounts_db.dart';
+import 'package:Filerole/model/pojo/MasterAccountModel.dart';
+import 'package:Filerole/model/providers/LanguageProvider.dart';
+import 'package:Filerole/ui/master/master_main/MasterMainScreen.dart';
 import 'package:Filerole/ui/notifications/notification_screen.dart';
 import 'package:Filerole/util/SaveAccountsSharedPref.dart';
+import 'package:Filerole/util/ToastHelper.dart';
+import 'package:Filerole/util/check_network_response.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
@@ -134,11 +140,12 @@ class _SavedAccountsScreenState extends State<SavedAccountsScreen> {
                     //  prefss.deleteingAccounts(index);
 
                     setState(() {
-                     acountsDb.removeAccount(masterAccountsArr[index]);
+                      acountsDb.removeAccount(masterAccountsArr[index]);
                       masterAccountsArr.removeAt(index);
                     });
                   },
                   child: ListTile(
+                    onTap: () => loginMaster(masterAccountsArr[index]),
                     leading: Image.network(
                       masterAccountsArr[index].img!,
                       height: 80,
@@ -191,5 +198,76 @@ class _SavedAccountsScreenState extends State<SavedAccountsScreen> {
     } else {
       return true;
     }
+  }
+
+  void loginMaster(MasterAccountModel masterAccount)async {
+    // print(masterAccount.password??'a8a');
+   
+    await StaticMasterClient.client
+        .loginService(
+      mail: masterAccount.email!,
+      pass: masterAccount.password!,
+      serverUrl: masterAccount.domain!,
+      type: masterAccount.userType??'owner',
+    )
+        .then(
+          (response) {
+      //checking status code
+      if (checkNetworkResponseStatusCode(response)) {
+        //checking User Type
+        if (response?['userType'] == 'owner') {
+          StaticUserVar.userAccount 
+          
+            ..accessToken = response?['token']
+            ..domain = response?['url']
+            ..name =
+                response?['user']['name'] + ' ' + response?['user']['name_en']
+            ..firstName = response?['user']['name']
+            ..lastName = response?['user']['name_en']
+             ..email = response?['user']['email']
+            ..phoneNumber = response?['user']['phone_number'].toString()
+            ..img = response?['user']['profile_image'];
+          //posting device Fcm token
+          FirebaseMessaging.instance.getToken().then((tokenFcm) {
+            if (tokenFcm != null) {
+              
+              StaticMasterClient.client
+                  .tokenFcmService(
+                      token: StaticUserVar.userAccount.accessToken!,
+                      tokenFcm: tokenFcm)
+                  .then((response) {
+                                  print('fcmm$response');
+                
+              });
+            }
+          });
+
+          createToast(response?['message'],
+              colour: Colors.greenAccent.withOpacity(0.6));
+
+          //save account in Local Db
+          SavedAccountsDb()..addAccount(StaticUserVar.userAccount);
+
+          toMasterScreen();
+        }  
+      } else {
+        createToast(response?['errors'] ?? 'Something went wrong!',
+            colour: Colors.red.withOpacity(0.6));
+      }
+    }).catchError((error) {
+      //  createToast(error.toString());
+      createToast('Check your network connection');
+    });
+     
+
+   
+  }
+  toMasterScreen(){
+ //checking current lang then redirect to Home Screen
+    Provider.of<LanguageProvider>(context, listen: false)
+        .initChangeLangUtil()
+        .then((value) {
+      Navigator.pushReplacementNamed(context, 'master_main');
+    });
   }
 }

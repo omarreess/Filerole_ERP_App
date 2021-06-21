@@ -36,6 +36,8 @@ class MasterAccountModel  extends HiveObject {
   String?   subscriptions;
    @HiveField(13)
   String?   userType;
+  @HiveField(14)
+  String?   password;
   
    MasterAccountModel({
     this.name,
@@ -51,6 +53,7 @@ class MasterAccountModel  extends HiveObject {
     this.firstName,
     this.lastName,
     this.accessToken,
-  this.userType
+  this.userType,
+  this.password
   });
 }

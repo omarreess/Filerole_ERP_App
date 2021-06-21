@@ -5,6 +5,7 @@ import 'package:Filerole/model/constants/Constants.dart';
 
  import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
 
@@ -61,7 +62,13 @@ class SplashScreen extends StatelessWidget {
   {
 
     Future.delayed(const Duration(milliseconds: 7000), () {
-        Navigator.pushReplacementNamed(ctx, 'intro');
+   
+     checkPref().then((flag){
+       (flag)
+       ?   Navigator.pushReplacementNamed(ctx, 'intro')
+       : Navigator.pushReplacementNamed(ctx, 'auth_intro');
+     } );
+     
     });
   }
 
@@ -98,8 +105,7 @@ class SplashScreen extends StatelessWidget {
           minHeight: 2.5,
           backgroundColor: Colors.transparent,
         )
-    )
-    ;
+    );
   }
 
   Widget waveGreenWidget(){
@@ -132,4 +138,20 @@ class SplashScreen extends StatelessWidget {
     );
   }
 }
+
+
+
+
+//for checking 1st time to entre app or not
+ Future<bool> checkPref() async
+ {
+    final prefs = await SharedPreferences.getInstance();
+
+     bool checked = prefs.getBool('1st time') ?? true;
+     if (checked)  prefs.setBool('1st time', false);
+
+    return checked;
+}
+
+
 

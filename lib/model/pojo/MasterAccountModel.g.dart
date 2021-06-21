@@ -31,13 +31,14 @@ class MasterAccountModelAdapter extends TypeAdapter<MasterAccountModel> {
       lastName: fields[6] as String?,
       accessToken: fields[3] as String?,
       userType: fields[13] as String?,
+      password: fields[14] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, MasterAccountModel obj) {
     writer
-      ..writeByte(14)
+      ..writeByte(15)
       ..writeByte(0)
       ..write(obj.storeName)
       ..writeByte(1)
@@ -65,7 +66,9 @@ class MasterAccountModelAdapter extends TypeAdapter<MasterAccountModel> {
       ..writeByte(12)
       ..write(obj.subscriptions)
       ..writeByte(13)
-      ..write(obj.userType);
+      ..write(obj.userType)
+      ..writeByte(14)
+      ..write(obj.password);
   }
 
   @override

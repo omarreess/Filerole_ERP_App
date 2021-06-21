@@ -1,14 +1,17 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:Filerole/generated/l10n.dart';
 import 'package:Filerole/model/constants/Constants.dart';
-import 'package:Filerole/model/MasterAccountModel.dart';
-import 'package:Filerole/model/MasterProfileDetailsModel.dart';
+import 'package:Filerole/model/pojo/MasterProfileDetailsModel.dart';
+import 'package:Filerole/model/pojo/MasterAccountModel.dart';
+import 'package:Filerole/networking/restful/endpoints/master_endpoints.dart';
 import 'package:Filerole/ui/master/master_main/MasterMainScreen.dart';
 import 'package:Filerole/util/ToastHelper.dart';
 import 'package:Filerole/util/check_network_response.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
 
 //Screen States
 enum ButtonTypes {
@@ -35,7 +38,7 @@ class _MasterProfileState extends State<MasterProfile> {
   bool showPass = true;
   bool imgFromFile = false;
   late File newImg;
-  
+
   //Form key
   final formKey = GlobalKey<FormState>();
   //flag var to switch between Details Screen & Change pass Screen
@@ -111,7 +114,7 @@ class _MasterProfileState extends State<MasterProfile> {
                   child: (imgFromFile)
                       ? Image.file(
                           newImg,
-                        //  fit: BoxFit.fill,
+                          //  fit: BoxFit.fill,
                         )
                       : Image.network(
                           StaticUserVar.userAccount.img!,
@@ -528,7 +531,8 @@ class _MasterProfileState extends State<MasterProfile> {
       source: ImageSource.gallery,
     );
     if (pickedFile != null) {
-       newImg= File(pickedFile.path);
+      newImg = File(pickedFile.path);
+      uploadUserImg(img: newImg, userData: StaticUserVar.userAccount);
       setState(() {
         imgFromFile = true;
       });
@@ -624,4 +628,35 @@ Future<bool> updateProfilePassword({
     updateFlag = false;
   });
   return updateFlag!;
+}
+
+//upload profile pic
+uploadUserImg({required File img, required MasterAccountModel userData}) async {
+  final masterEndpoints = MasterEndpoints();
+  final url = '${masterEndpoints.baseUrl}${masterEndpoints.profileUpdate}';
+
+  var request = http.MultipartRequest('POST', Uri.parse(url));
+
+  request.headers.addAll({
+    "Content-Type": "application/json",
+    'Authorization': 'Bearer ${userData.accessToken} ',
+  });
+  request.fields.addAll({
+    'email': '${userData.email}',
+     'first_name': '${userData.firstName}',
+    'last_name': '${userData.lastName}',
+    'phone_number': '${userData.phoneNumber}'
+  });
+
+  request.files.add(http.MultipartFile.fromBytes('image', img.readAsBytesSync(),
+       filename: img.path
+      ));
+  request.send().then((response) {
+    response.stream.transform(utf8.decoder).listen((value) {
+
+      // createToast(value.toString());
+      // print(value);
+    });
+    //   createToast(response. toString()); //message json.decode(response!.body);
+  });
 }

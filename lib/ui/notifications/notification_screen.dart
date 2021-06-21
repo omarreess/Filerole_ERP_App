@@ -1,6 +1,6 @@
 import 'package:Filerole/generated/l10n.dart';
 import 'package:Filerole/model/constants/Constants.dart';
-import 'package:Filerole/model/NotifyModel.dart';
+import 'package:Filerole/model/pojo/NotifyModel.dart';
 import 'package:Filerole/ui/master/master_main/MasterMainScreen.dart';
 import 'package:flutter/material.dart';
 

@@ -28,6 +28,7 @@ import 'package:introduction_screen/introduction_screen.dart';
     body :IntroSlider(
       slides: slides,
       onDonePress: (){
+        
       Navigator.pushReplacementNamed(context, 'auth_intro');
       },
     ));

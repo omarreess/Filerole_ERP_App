@@ -1,7 +1,7 @@
 import 'package:Filerole/model/constants/Constants.dart';
 import 'package:Filerole/model/database/save_accounts_db.dart';
 import 'package:Filerole/model/providers/LanguageProvider.dart';
-import 'package:Filerole/model/LoginAuthModel.dart';
+import 'package:Filerole/model/pojo/LoginAuthModel.dart';
 import 'package:Filerole/networking/graphql/authentication/AuthInterface.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
@@ -463,25 +463,28 @@ class _LoginScreenState extends State<LoginScreen> {
       serverUrl: myAuthModel.serverUrl!,
       type: myAuthModel.userType!,
     )
-        .then((response) {
-      // checking status code
+        .then(
+          (response) {
+      //checking status code
       if (checkNetworkResponseStatusCode(response)) {
         //checking User Type
         if (response?['userType'] == 'owner') {
           StaticUserVar.userAccount
+          
             ..accessToken = response?['token']
             ..domain = response?['url']
             ..name =
                 response?['user']['name'] + ' ' + response?['user']['name_en']
             ..firstName = response?['user']['name']
             ..lastName = response?['user']['name_en']
+            ..password = myAuthModel.password
             ..email = response?['user']['email']
             ..phoneNumber = response?['user']['phone_number'].toString()
-            ..img = response?['user']['social_image'];
+            ..img = response?['user']['profile_image'];
           //posting device Fcm token
           FirebaseMessaging.instance.getToken().then((tokenFcm) {
             if (tokenFcm != null) {
-              print('fcmm$tokenFcm');
+              
               StaticMasterClient.client
                   .tokenFcmService(
                       token: StaticUserVar.userAccount.accessToken!,
