@@ -9,7 +9,8 @@
     <application
         android:name=".Application"
         android:label="Filerole"
-        android:icon="@drawable/logoround">
+        android:icon="@drawable/logoround"
+        android:requestLegacyExternalStorage="true">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

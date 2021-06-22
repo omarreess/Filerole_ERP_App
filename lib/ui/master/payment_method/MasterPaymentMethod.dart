@@ -4,7 +4,7 @@
 
 import 'package:Filerole/generated/l10n.dart';
 import 'package:Filerole/model/constants/Constants.dart';
-import 'package:Filerole/model/MasterPaymentCardModel.dart';
+import 'package:Filerole/model/pojo/MasterPaymentCardModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 //   final clrBorder = Color(int.parse('#A2A8CA'.replaceAll('#', '0xff')));

@@ -1,5 +1,5 @@
 import 'package:Filerole/model/constants/Constants.dart';
-import 'package:Filerole/model/MasterAccountModel.dart';
+import 'package:Filerole/model/pojo/MasterAccountModel.dart';
 import 'package:Filerole/model/database/save_accounts_db.dart';
 import 'package:Filerole/ui/notifications/notification_screen.dart';
 import 'package:Filerole/util/SaveAccountsSharedPref.dart';

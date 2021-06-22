@@ -1,13 +1,13 @@
 import 'package:Filerole/generated/l10n.dart';
 import 'package:Filerole/model/constants/Constants.dart';
-import 'package:Filerole/model/NotifyModel.dart';
+import 'package:Filerole/model/pojo/NotifyModel.dart';
 import 'package:flutter/material.dart';
 
 class NotificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: clrGreen5,
+      backgroundColor: clrGreen3.withOpacity(0.8),
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,

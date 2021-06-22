@@ -1,11 +1,14 @@
+import 'dart:io';
+
 import 'package:Filerole/generated/l10n.dart';
 import 'package:Filerole/model/constants/Constants.dart';
-import 'package:Filerole/model/MasterAccountModel.dart';
-import 'package:Filerole/model/MasterProfileDetailsModel.dart';
+import 'package:Filerole/model/pojo/MasterAccountModel.dart';
+import 'package:Filerole/model/pojo/MasterProfileDetailsModel.dart';
 import 'package:Filerole/ui/master/master_main/MasterMainScreen.dart';
 import 'package:Filerole/util/ToastHelper.dart';
 import 'package:Filerole/util/check_network_response.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 //Screen States
 enum ButtonTypes {
@@ -560,6 +563,20 @@ Future<bool> updateProfileData({
   });
   return updateFlag!;
 }
+getImgFromGallery() async {
+    final picker = ImagePicker();
+    PickedFile? pickedFile = await picker.getImage(
+      
+            //return file
+        source: ImageSource.gallery,
+       
+    );
+    if (pickedFile != null) {
+       
+		  final imgFile = File(pickedFile.path);
+      
+    }
+}	
 
 Future<bool> updateProfilePassword({
   String? currentPass,

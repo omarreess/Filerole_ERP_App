@@ -1,22 +1,24 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:Filerole/networking/restful/services/login_service.dart'
+import 'package:Filerole/networking/restful/services/master_services/login_service.dart'
     as Login;
-import 'package:Filerole/networking/restful/services/forget_pass_service.dart'
+import 'package:Filerole/networking/restful/services/master_services/forget_pass_service.dart'
     as Forget;
-import 'package:Filerole/networking/restful/services/logout_service.dart'
+import 'package:Filerole/networking/restful/services/master_services/logout_service.dart'
     as Logout;
-import 'package:Filerole/networking/restful/services/payments_service.dart'
+import 'package:Filerole/networking/restful/services/master_services/payments_service.dart'
     as Payments;
-import 'package:Filerole/networking/restful/services/profile_update_pass_service.dart'
+import 'package:Filerole/networking/restful/services/master_services/profile_update_pass_service.dart'
     as UpdatePass;
-import 'package:Filerole/networking/restful/services/profile_update_service.dart'
+import 'package:Filerole/networking/restful/services/master_services/profile_update_service.dart'
     as UpdateData;
-import 'package:Filerole/networking/restful/services/subscriptions_service.dart'
+import 'package:Filerole/networking/restful/services/master_services/subscriptions_service.dart'
     as Subscrip;
-import 'package:Filerole/networking/restful/services/user_data_service.dart'
+import 'package:Filerole/networking/restful/services/master_services/user_data_service.dart'
     as User;
+    import 'package:Filerole/networking/restful/services/master_services/update_fcm_token.dart'
+    as FcmToken;
 
 String? accessToken;
 
@@ -145,6 +147,22 @@ class MasterClient {
 
     User.profileUpdateService(
       token: accessToken ?? token!,
+    ).then((response) {
+      responseMap = json.decode(response!.body);
+    });
+    //.catchError();
+    return responseMap;
+  }
+  //Posting FCM Token
+  Future<Map<String, dynamic>?> tokenFcmService ({
+     required String  token,
+   required String  tokenFcm,
+  }) async {
+    
+    Map<String, dynamic>? responseMap;
+    await FcmToken.updateFcmTokenService(
+      token: token   ,
+      tokenFcm: tokenFcm   ,
     ).then((response) {
       responseMap = json.decode(response!.body);
     });

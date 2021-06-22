@@ -1,7 +1,7 @@
 import 'package:Filerole/generated/l10n.dart';
 import 'package:Filerole/model/constants/Constants.dart';
-import 'package:Filerole/model/MasterAccountModel.dart';
-import 'package:Filerole/model/MasterPlansModel.dart';
+import 'package:Filerole/model/pojo/MasterAccountModel.dart';
+import 'package:Filerole/model/pojo/MasterPlansModel.dart';
 import 'package:Filerole/ui/master/master_main/MasterMainScreen.dart';
 import 'package:Filerole/util/ToastHelper.dart';
 import 'package:Filerole/util/check_network_response.dart';

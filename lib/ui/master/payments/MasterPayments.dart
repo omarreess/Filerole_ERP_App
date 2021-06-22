@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:Filerole/generated/l10n.dart';
 import 'package:Filerole/model/constants/Constants.dart';
-import 'package:Filerole/model/MasterPaymentModel.dart';
-import 'package:Filerole/model/MasterPlansModel.dart';
+import 'package:Filerole/model/pojo/MasterPaymentModel.dart';
+import 'package:Filerole/model/pojo/MasterPlansModel.dart';
 import 'package:Filerole/ui/auth/LoginScreen.dart';
 import 'package:Filerole/ui/master/master_main/MasterMainScreen.dart';
 import 'package:Filerole/ui/master/payment_method/MasterPaymentMethod.dart';
@@ -12,17 +12,22 @@ import 'package:Filerole/util/check_network_response.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class MasterPayments extends StatelessWidget {
+class MasterPayments extends StatefulWidget {
   //popup blured screen
-  late OverlayEntry popupDialogVar;
-  //for Loading
-  bool dataReady = false;
+  @override
+  _MasterPaymentsState createState() => _MasterPaymentsState();
+}
 
-  //for network pagination
+class _MasterPaymentsState extends State<MasterPayments> {
+  late OverlayEntry popupDialogVar;
+
+  bool dataReady = false;
+  bool dataFiltered = false;
+
   late int currentPage;
+
   late int lastPage;
 
-  //Data
   List<MasterPaymentsModel> paymentsPlan = List.empty(growable: true);
 
   @override
@@ -49,8 +54,10 @@ class MasterPayments extends StatelessWidget {
           height: 3,
         ),
 
-        //plans list
-        FutureBuilder(
+        //payments list
+       (dataFiltered) ?paymentListWidget(context)
+      
+        : FutureBuilder(
             future:
                 getPaymentsList(token: StaticUserVar.userAccount.accessToken!),
             builder: (context, snapshot) {
@@ -73,6 +80,7 @@ class MasterPayments extends StatelessWidget {
                                 CircularProgressIndicator(color: clrGreen3))));
               }
             }),
+
       ],
     );
   }
@@ -256,15 +264,40 @@ class MasterPayments extends StatelessWidget {
       width: 100,
       height: 50,
       child: PopupMenuButton(
+        onSelected: (value) {
+          // add this property
+          setState(() {
+dataFiltered= true ; 
+            switch (value) {
+              case 0:
+                paymentsPlan.sort((a, b) => a.date!.compareTo(b.date!));
+
+                break;
+
+              case 1:
+                paymentsPlan.sort((b, a) => a.amount!.compareTo(b.amount!));
+                break;
+
+              case 2:
+                paymentsPlan.sort((a, b) => a.amount!.compareTo(b.amount!));
+                break;
+
+              default:
+            }
+          });
+        },
         itemBuilder: (context) => [
           PopupMenuItem(
             child: Text(S.current.sort_by_date),
+            value: 0,
           ),
           PopupMenuItem(
             child: Text(S.current.sort_by_highpaid),
+            value: 1,
           ),
           PopupMenuItem(
             child: Text(S.current.sort_by_lowpaid),
+            value: 2,
           ),
         ],
         child: Card(

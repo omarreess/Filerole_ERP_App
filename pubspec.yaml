@@ -25,6 +25,8 @@ dependencies:
   google_fonts: ^2.1.0
   package_info: ^2.0.0
   flutter_svg: ^0.22.0
+  image_picker: ^0.8.0+3
+
   flutter_inappwebview: ^5.3.2
   introduction_screen: ^2.1.0
   #data_connection_checker: ^0.3.4

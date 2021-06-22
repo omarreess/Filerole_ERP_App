@@ -12,6 +12,7 @@ class MasterEndpoints {
   final  String forgetPassword = '/forget-password';
   final  String profileUpdate = '/profile-update';
   final  String profilePasswordUpdate = '/profile-password-update';
+  final  String fcmTokenUpdate = '/device-token-update';
 
 
   //Get

@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
 import 'generated/l10n.dart';
+
 import 'model/constants/Constants.dart';
 import 'model/database/save_accounts_db.dart';
 import 'model/providers/LanguageProvider.dart';
@@ -14,6 +15,7 @@ import 'ui/auth/LoginScreen.dart';
 import 'ui/auth/SavedAcountsScreen.dart';
 import 'ui/intro/IntroSliderScreens.dart';
 import 'ui/auth/AuthIntroScreen.dart';
+
 import 'ui/master/master_main/MasterMainScreen.dart';
 import 'ui/notifications/notification_screen.dart';
 import 'ui/splash/SplashScreen.dart';
