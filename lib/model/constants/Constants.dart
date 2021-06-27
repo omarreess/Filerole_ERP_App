@@ -13,6 +13,8 @@ final clrBorder = Color(int.parse('#A2A8CA'.replaceAll('#', '0xff')));
 final clrInputBackground =
     Color(int.parse('#E3E6F0'.replaceAll('#', '0xff'))).withOpacity(0.5);
 final clrBackground = Color.fromARGB(255, 225, 245, 228);
+final clrLogo= Color.fromARGB(255,121,180,0);
+
 final clrGreen = Color(int.parse('#3cb464'.replaceAll('#', '0xff')));
 final clrBackground2 = Color(int.parse('#DDE6EE'.replaceAll('#', '0xff')));
 final clrGreen2 = Color(int.parse('#65b892'.replaceAll('#', '0xff')));

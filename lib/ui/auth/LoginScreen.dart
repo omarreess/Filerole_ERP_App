@@ -3,6 +3,7 @@ import 'package:Filerole/model/database/save_accounts_db.dart';
 import 'package:Filerole/model/providers/LanguageProvider.dart';
 import 'package:Filerole/model/pojo/LoginAuthModel.dart';
 import 'package:Filerole/networking/graphql/authentication/AuthInterface.dart';
+import 'package:Filerole/util/webview_util.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'package:Filerole/networking/graphql/authentication/MasterAuth.dart';
@@ -356,7 +357,7 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Container(
           decoration: BoxDecoration(
               // gradient: gradient
-              color: clrGreen5),
+              color: clrGreen3),
           child: FlatButton(
             padding: EdgeInsets.all(16),
             //  padding:EdgeInsets.all(20) ,
@@ -463,14 +464,12 @@ class _LoginScreenState extends State<LoginScreen> {
       serverUrl: myAuthModel.serverUrl!,
       type: myAuthModel.userType!,
     )
-        .then(
-          (response) {
+        .then((response) {
       //checking status code
       if (checkNetworkResponseStatusCode(response)) {
         //checking User Type
         if (response?['userType'] == 'owner') {
           StaticUserVar.userAccount
-          
             ..accessToken = response?['token']
             ..domain = response?['url']
             ..name =
@@ -484,14 +483,12 @@ class _LoginScreenState extends State<LoginScreen> {
           //posting device Fcm token
           FirebaseMessaging.instance.getToken().then((tokenFcm) {
             if (tokenFcm != null) {
-              
               StaticMasterClient.client
                   .tokenFcmService(
                       token: StaticUserVar.userAccount.accessToken!,
                       tokenFcm: tokenFcm)
                   .then((response) {
-                                  print('fcmm$response');
-                
+                print('fcmm$response');
               });
             }
           });
@@ -504,7 +501,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
           toMasterScreen();
         } else {
-          toStaffScreen();
+          toStaffScreen(response?['url']);
         }
       } else {
         createToast(response?['errors'] ?? 'Something went wrong!',
@@ -578,10 +575,12 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void toForgetPassScreen() {
-    Navigator.pushReplacementNamed(context, 'forget_pass');
+    Navigator.pushNamed(context, 'forget_pass');
   }
 
-  void toStaffScreen() {}
+  void toStaffScreen(String url) {
+    openWebView(url);
+  }
 
   void showChooseTypeSheet(BuildContext context) {
     showModalBottomSheet(

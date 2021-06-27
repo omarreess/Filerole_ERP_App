@@ -1,4 +1,5 @@
 import 'package:Filerole/model/constants/Constants.dart';
+import 'package:Filerole/util/webview_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -8,20 +9,7 @@ import 'InAppBrowser.dart';
 import 'dart:io';
 
 class AuthIntroScreen extends StatelessWidget {
-  var options = InAppBrowserClassOptions(
-      crossPlatform: InAppBrowserOptions(
-          hideUrlBar: true,
-          toolbarTopBackgroundColor: clrBackground2,
-          hideToolbarTop: true,
-          hidden: false),
-      android: AndroidInAppBrowserOptions(
-        allowGoBackWithBackButton: true,
-        hideTitleBar: true,
-      ),
-      inAppWebViewGroupOptions: InAppWebViewGroupOptions(
-          crossPlatform: InAppWebViewOptions(
-        javaScriptEnabled: true,
-      )));
+
 
   @override
   Widget build(BuildContext context) {
@@ -74,13 +62,14 @@ class AuthIntroScreen extends StatelessWidget {
                     endIndent: double.infinity,
                     indent: double.infinity,
                   ),
+
                   //login
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     width: double.infinity,
                     height: 65,
                     decoration: BoxDecoration(
-                        color: clrGreen5,
+                        color: clrGreen3,
                         borderRadius: BorderRadius.circular(25)),
                     margin: EdgeInsets.only(
                         left: 20, right: 20, top: constraints.maxHeight * 0.02),
@@ -129,34 +118,14 @@ class AuthIntroScreen extends StatelessWidget {
                     width: double.infinity,
                     height: 65,
                     decoration: BoxDecoration(
-                        color: clrGreen5,
+                        color: clrGreen3,
                         borderRadius: BorderRadius.circular(25)),
                     margin: EdgeInsets.only(
                         left: 20, right: 20, top: constraints.maxHeight * 0.02),
                     child: InkWell(
                       splashColor: Colors.white,
                       onTap: () {
-                        final MyInAppBrowser browser = new MyInAppBrowser();
-
-                        final String url = 'https://filerole.com/register';
-                        browser.openUrlRequest(
-                            urlRequest: URLRequest(url: Uri.parse(url)),
-                            options: options);
-
-                        // MyChromeSafariBrowser().open(
-                        //     url: Uri.parse(url),
-                        //     options: ChromeSafariBrowserClassOptions(
-                        //
-                        //         android: AndroidChromeCustomTabsOptions(   addDefaultShareMenuItem: false , showTitle: false),
-                        //
-                        //         ios: IOSSafariOptions(barCollapsingEnabled: true)));
-
-                        // MyInAppBrowser().openUrlRequest(
-                        //   options: options,
-                        //     urlRequest: URLRequest(url: Uri.parse(url))
-                        // );
-
-                        // Navigator.pushNamed(context, 'register');
+                        openWebView('https://filerole.com/register');
                       },
                       child: Row(
                         //  mainAxisAlignment: MainAxisAlignment.space,

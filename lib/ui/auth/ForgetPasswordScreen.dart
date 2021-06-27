@@ -182,7 +182,7 @@ class _ForgetPassScreenState extends State<ForgetPasswordScreen> {
         child: Container(
           decoration: BoxDecoration(
               // gradient: gradient
-              color: clrGreen5),
+              color: clrGreen3),
           child: FlatButton(
             padding: EdgeInsets.all(16),
             //  padding:EdgeInsets.all(20) ,
